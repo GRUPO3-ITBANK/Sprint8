@@ -1,0 +1,254 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.dark-doc {
+  --gradient: linear-gradient(
+    150deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgb(102, 102, 236) 34%,
+    rgb(160, 236, 252) 93%
+  );
+  --bg-col: #141414;
+  --text-light: rgb(213, 213, 213);
+  --details: rgb(10, 73, 178);
+  --togglemenu: rgb(46, 44, 46);
+}
+.white-doc {
+  --gradient: linear-gradient(
+    170deg,
+    rgba(232, 245, 255) 0%,
+    rgb(232, 240, 255) 34%,
+    rgb(244, 240, 255) 93%
+  );
+  --bg-col: rgb(255, 255, 255);
+  --text-light: rgb(46, 79, 104);
+  --details: #4e86ff;
+  --togglemenu: rgb(82 114 155);
+}
+
+.text-light {
+  --bs-text-opacity: 1;
+  color: var(--text-light) !important;
+}
+.bg-color {
+  background: var(--bg-col);
+}
+html {
+  background: var(--bg-col);
+  min-height: 100%;
+  position: relative;
+}
+.row {
+  margin-right: 0;
+  --bs-gutter-x: 0;
+}
+body {
+  position: relative;
+  padding: 0 0 0 0;
+  background: var(--bg-col);
+  background-attachment: fixed;
+  grid-template-rows: auto 1fr auto;
+  overflow-x: hidden;
+  margin: 0;
+  display: block;
+  table-layout: fixed;
+}
+
+.navbar {
+  /* border-width: 0 0 5px 0;
+  border-style: solid;
+  border-image-source: url("./../images/linea-de-colores.png");
+  border-image-slice: 1; */
+  height: 56px;
+  flex-wrap: nowrap;
+  position: fixed;
+  width: 100%;
+  z-index: 99999;
+}
+.logo {
+  width: 130px;
+  list-style: none;
+}
+
+li {
+  list-style: none;
+}
+/*CUERPO*/
+
+.espacio {
+  height: 200px;
+}
+.espacio1 {
+  height: 300px;
+}
+
+/* -------------------------- */
+
+header label {
+  font-size: 30px;
+  cursor: pointer;
+  display: block;
+}
+
+.menu ul {
+  background-color: var(--togglemenu);
+  opacity: 0.95;
+  list-style: none;
+  padding: 0px;
+}
+
+.menu a {
+  padding: 0px 10px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu li:hover {
+  background: var(--bs-border-color-translucent);
+}
+
+.menu a span {
+  margin-left: 10px;
+  position: absolute;
+  right: 5px;
+}
+
+.menu ul li {
+  font-size: medium;
+  font-weight: 400;
+  padding: 10px 0px 10px 0px;
+}
+
+.menu ul ul a {
+  padding: 0px 0px 0px 40px;
+}
+
+.menu {
+  height: 50px;
+  top: 0;
+  position: absolute;
+  top: 56px;
+  left: 0;
+  width: 100%;
+  z-index: 9999999;
+  transition: all 0.3s;
+}
+.menu-inactive {
+  transform: translateX(-100%);
+}
+
+.menu-active {
+  transform: translateX(0%);
+}
+
+.submenu-inactive {
+  display: none;
+}
+.submenu-active {
+  display: inline;
+}
+
+.slide-in-top {
+  -webkit-animation: slide-in-top 1.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  animation: slide-in-top 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@-webkit-keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+@keyframes slide-in-top {
+  0% {
+    -webkit-transform: translateY(-1000px);
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/*--------------- SWITCH ---------------*/
+
+.switch-label {
+  background-color: rgb(54, 52, 56);
+  display: flex;
+  border-radius: 50px;
+  height: 26px;
+  width: 50px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+  transition: 0.4s;
+}
+
+.fa-moon {
+  color: #f1c40f;
+}
+
+.fa-sun {
+  color: #f39c12;
+  margin-right: 7px;
+}
+
+.ball {
+  background-color: #fff;
+  position: absolute;
+  height: 22px;
+  width: 22px;
+  top: 2px;
+  left: 2px;
+  border-radius: 50%;
+  transition: transform 0.1s linear;
+}
+
+.switch {
+  opacity: 0;
+  position: absolute;
+}
+
+.switch:checked + .switch-label {
+  background-color: #7c98ab;
+  transition: 0.4s;
+}
+
+.switch:checked + .switch-label .ball {
+  transform: translateX(24px);
+}
+
+.swal-wide {
+  height: 300px;
+}
+
+.img {
+  height: 200px;
+}
+
+/* ALTURAS */
+#containerRegistro,
+#containerLogin,
+#containerChangePass {
+  height: 100vh;
+}
+
+@media (max-height: 800px) {
+  #containerRegistro,
+  #containerLogin,
+  #containerChangePass {
+    height: 800px;
+  }
+}

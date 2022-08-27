@@ -1,0 +1,192 @@
+{% extends 'ITBA/base-nav-inicio.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Index{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+{% block spansNavbar %}
+<a href="{% url 'index' %}" class="ap personas text-light fw-semibold">Personas</a>
+<a href=# class="ap empresas text-light fw-semibold ms-4">Empresas</a>
+{% endblock spansNavbar %}
+<div style="background: var(--gradient)">
+  <div class="container car mb-5 shadow" id="contenedor-carrusel">
+    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="true">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+          aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+          aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+          aria-label="Slide 3"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"
+          aria-label="Slide 4"></button>
+      </div>
+      <div class="carousel-inner">
+        <div class="carousel-item active" style="margin-top: 56px">
+          <img src="{% static 'ITBA/img/Chica-tarjet.jpg' %}" class="d-block w-100" alt="Imagen 1" />
+        </div>
+        <div class="carousel-item" style="margin-top: 56px">
+          <img src="{% static 'ITBA/img/Persona-celular.jpg' %}" class="d-block w-100" alt="Imagen 2" />
+        </div>
+        <div class="carousel-item" style="margin-top: 56px">
+          <img src="{% static 'ITBA/img/Tarjeta1.jpg' %}" class="d-block w-100" alt="Imagen 3" />
+        </div>
+        <div class="carousel-item" style="margin-top: 56px">
+          <img src="{% static 'ITBA/img/Abuelitos.jpg' %}" class="d-block w-100" alt="Imagen 4" />
+        </div>
+      </div>
+      <button class="carousel-control-prev mt-5" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next mt-5" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
+  </div>
+  <!---->
+
+  <!--ACCESO RAPIDO-->
+  <div class="container" id="container-acceso-rapido">
+    <div class="acceso-rapido-fondo shadow rounded">
+      <ul>
+        <li class="li-accesorapido">
+          <img src="{% static 'ITBA/img/icons/credit-card.png' %}" alt="Tarjetas" />
+          <p class="acceso-rapido-text">Tarjetas</p>
+        </li>
+        <li class="li-accesorapido">
+          <img class="md-18" src="{% static 'ITBA/img/icons/house-user.png' %}" alt="Seguros" />
+          <p class="acceso-rapido-text">Seguros</p>
+        </li>
+        <li class="li-accesorapido">
+          <img src="{% static 'ITBA/img/icons/megaphone.png' %}" alt="Promociones" />
+          <p class="acceso-rapido-text">Promociones</p>
+        </li>
+        <li class="li-accesorapido">
+          <img src="{% static 'ITBA/img/icons/up-arrow.png' %}" alt="Inversiones" />
+          <p class="acceso-rapido-text">Inversiones</p>
+        </li>
+        <li class="li-accesorapido">
+          <img src="{% static 'ITBA/img//icons/cash-coin.png' %}" alt="Cuentas" />
+          <p class="acceso-rapido-text">Cuentas</p>
+        </li>
+        <li class="li-accesorapido">
+          <img id="icon-prestamos" src="{% static 'ITBA/img/icons/money-bag.png' %}" alt="Prestamos" />
+          <p class="acceso-rapido-text">Prestamos</p>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <!--Carrusel ACCESO RAPIDO-->
+  <div class="container" id="container-acceso-rapido-celular">
+    <div class="acceso-rapido-fondo">
+      <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <li class="li-accesorapido">
+              <img id="icon-prestamos" src="{% static 'ITBA/img/icons/credit-card.png' %}"
+                class="tamaño-iconos-acceso-rapido" alt="Tarjetas" />
+              <p class="acceso-rapido-text">Tarjetas</p>
+            </li>
+
+            <li class="li-accesorapido">
+              <img src="{% static 'ITBA/img/icons/up-arrow.png' %}" class="tamaño-iconos-acceso-rapido"
+                alt="Inversiones" />
+              <p class="acceso-rapido-text">Inversiones</p>
+            </li>
+          </div>
+          <div class="carousel-item">
+            <li class="li-accesorapido">
+              <img src="{% static 'ITBA/img/icons/megaphone.png' %}" class="tamaño-iconos-acceso-rapido"
+                alt="Promociones" />
+              <p class="acceso-rapido-text">Promocion</p>
+            </li>
+            <li class="li-accesorapido">
+              <img src="{% static 'ITBA/img/icons/house-user.png' %}" class="tamaño-iconos-acceso-rapido"
+                alt="Seguros" />
+              <p class="acceso-rapido-text">Seguros</p>
+            </li>
+          </div>
+
+          <div class="carousel-item">
+            <li class="li-accesorapido">
+              <img src="{% static 'ITBA/img/cash-coin.png' %}" class="tamaño-iconos-acceso-rapido" alt="Cuentas" />
+              <p class="acceso-rapido-text">Cuentas</p>
+            </li>
+            <li class="li-accesorapido">
+              <img id="icon-prestamos" src="{% static 'ITBA/img/icons/money-bag.png' %}"
+                class="tamaño-iconos-acceso-rapido" alt="Prestamos" />
+              <p class="acceso-rapido-text">Prestamos</p>
+            </li>
+          </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls"
+          data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!--APARTADO DOLAR -->
+  <br /><br />
+  <div class="dolar container-fluid d-flex justify-content-center flex-wrap rounded p-3" id="apartadoDolar"></div>
+  <br /><br />
+
+  <div class="card mb-3">
+    <img src="{% static 'ITBA/img/card1.jpg' %}" class="card-img-top card-image" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">¡Bienvenido!</h5>
+      <p class="card-text">
+        Seas cliente o no, en cualquier dispositivo, bienvenido a la experiencia
+        ITBANK.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Hace unos minutos</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <img src="{% static 'ITBA/img/card2.jpg' %}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">¡Hacete cliente!</h5>
+      <p class="card-text">
+        Disfrutá de todos nuestros beneficios, potenciá tu emprendimiento,
+        realizá transacciones de forma segura. ¡Sé parte de ITBANK!
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Hace unos minutos</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="card mb-3">
+    <img src="{% static 'ITBA/img/card3.jpg' %}" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title">¡Vos también podés ayudarnos a mejorar!</h5>
+      <p class="card-text">
+        Leemos tus comentarios las 24 horas y resolvemos tus dudas.
+      </p>
+      <p class="card-text">
+        <small class="text-muted">Hace unos minutos</small>
+      </p>
+    </div>
+  </div>
+
+  <div class="espacio1"></div>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'ITBA/js/preciodolar.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  {% load static %}
+  <link href="{% static 'ITBA/vendor/bootstrap.min.css' %}" rel="stylesheet" />
+  <link href="{% static 'ITBA/css/fontello.css' %}" rel="stylesheet" />
+  {% block css %}
+  {% endblock %}
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css" />
+  <script src="https://kit.fontawesome.com/c64a36e535.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
+  <title>ITBANK | {% block title %}{% endblock %}</title>
+  <link rel="icon" type="image/png" href="{% static 'ITBA/img/itbank-logo.png' %}">
+</head>
+
+<body class="dark-doc">
+
+  {% block header %}
+  {% endblock %}
+
+  {% block content %}
+  {% endblock %}
+  <!-- Footer -->
+  <footer class="footer text-center text-lg-start bg-color text-light position-relative p-1">
+    <section class="d-flex justify-content-center p-2">
+      <!-- Left -->
+      <div class="d-flex d-lg-block justify justify-content-center" style="color: gray;">
+        <!-- Facebook -->
+        <i class=" bi-facebook ms-2"></i>
+        <!-- Twitter -->
+        <i class="bi-twitter ms-2"></i>
+
+        <!-- Google -->
+        <i class="bi-google ms-2"></i>
+
+        <!-- Youtube -->
+        <i class="bi-youtube ms-2"></i>
+
+        <!-- Github -->
+        <i class="bi-github ms-2"></i>
+
+
+      </div>
+
+    </section>
+    <section class="p-2">
+      <div class="container text-center text-md-start">
+        <!-- Grid row -->
+        <div class="row">
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
+            <!-- Content -->
+            <h6 class="text-uppercase fw-bold mb-4">
+              Horarios de atención
+            </h6>
+            <p>
+              Lunes a Viernes - 09:00hs a 20:00hs Sábado - 09:00hs a 12:00hs
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Links de ayuda</h6>
+            <p>
+              <a href="#!" class="text-reset">Cuenta</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Configuración</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Tarjetas</a>
+            </p>
+            <p>
+              <a href="#!" class="text-reset">Ayuda</a>
+            </p>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-sm-0 mb-4">
+            <!-- Links -->
+            <h6 class="text-uppercase fw-bold mb-4">Contactanos</h6>
+            <p><i class="fas fa-home me-3"></i>Iguazú 341, C1437 CABA</p>
+            <p>
+              <i class="fas fa-envelope me-3"></i>
+              info@itbank.com
+            </p>
+            <p><i class="fas fa-phone me-3"></i> 0810-222-4822</p>
+          </div>
+          <!-- Grid column -->
+        </div>
+        <!-- Grid row -->
+      </div>
+    </section>
+    <!-- Copyright -->
+    <div class="d-flex p-3 justify-content-between">
+      <p>
+        <span>© 2022 Banco ITBANK S.A. Todos los derechos Reservados.</span>
+        <span class="idiomas"><a href="#">Español</a> | <a href="#">English</a></span>
+      </p>
+      <div id="divSwitch">
+        <input type="checkbox" class="switch" id="switch" />
+        <label for="switch" class="switch-label">
+          <i class="fa-solid fa-sun"></i>
+          <i class="fa-solid fa-moon"></i>
+          <div class="ball"></div>
+        </label>
+      </div>
+    </div>
+  </footer>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% block scripts %}
+
+{% endblock %}
+<script src="{% static 'ITBA/js/menu.js' %}"></script>
+
+</html>

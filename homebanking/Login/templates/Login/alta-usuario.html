@@ -1,0 +1,65 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Alta de usuarios nuevos{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<section class="vh-100" style="background: var(--gradient);">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">Alta de usuarios</h3>
+                        {% if 'ok' in request.GET %}
+                        <P class="text-success">Usuario registrado exitosamente</P>
+                        {% endif %}
+
+                        <form action="" method="POST">
+                            {% csrf_token %}
+                            <div class="row">
+
+                                <div class="col-md-6 mb-4">
+                                    <div class="form-outline">
+                                        {{form.as_p}}
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6 mb-4">
+
+                                    <div class="form-outline">
+                                        <label class="form-label" for="dni">DNI</label>
+                                        <input type="text" id="dni" name="dni" class="form-control form-control-lg" />
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="mt-3">
+                                    <div class="form-outline">
+                                        <label class="form-label" for="pass">Contraseña</label>
+                                        <input type="password" id="pass" name="pass"
+                                            class="form-control form-control-lg" placeholder="Password" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-2">
+                                <input class="btn btn-primary btn-lg" type="submit" value="Dar alta" />
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{{request.POST}}

@@ -1,0 +1,84 @@
+{% extends 'ITBA/base-footer.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+{% block css %}
+<link href="{% static 'ITBA/css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'ITBA/css/general.css' %}" rel="stylesheet" />
+
+{% endblock %}
+<!-- Agrego titulo -->
+{% block title %}Inicio{% endblock %}
+<!-- Agrego contenido -->
+{% block header %}
+<header>
+    <!-- NAVBAR -->
+    <nav class="navbar bg-color shadow flex-nowrap position-absolute">
+        <div class="container-fluid">
+            <!-- LOGO -->
+            <a href="{% url 'index' %}">
+                <img class="logo" src="{% static 'ITBA/img/LOGO.png' %}" class="d-inline-block align-text-top" />
+            </a>
+            <!-- BOTONES NAV -->
+            <div class="nav-mid-column ms-2">
+                <div id="spansNavbar" class="d-flex align-items-center">
+                    {% block spansNavbar %}
+
+                    {% endblock spansNavbar %}
+                </div>
+                <div class="btsNavbar pt-2 p-3">
+                    {% if not request.user.is_authenticated %}
+                    <a class="btn btn-primary rounded-4 btn-sm ms-2" href="{% url 'login' %}">Ingresar</a>
+                    <a class=" btn btn-primary rounded-4 btn-sm ms-2" href="">Hacete cliente</a>
+                    {% else %}
+                    <a class="btn btn-primary rounded-4 btn-sm ms-2" href="{% url 'logout' %}">Cerrar sesión</a>
+                    <a class="btn btn-primary rounded-4 btn-sm ms-2" href="{% url 'home' %}">Homebanking</a>
+                    {% endif %}
+
+                </div>
+            </div>
+            <!-- HEADER MENU-->
+            <div class="header-menu">
+                <input type="checkbox" id="btn-menu" />
+                <label for="btn-menu" class="icon-menu text-light" onclick="desplegarHamburguesa()"></label>
+                <nav id="menu" class="menu menu-inactive">
+                    <ul>
+                        {% if not request.user.is_authenticated %}
+                        <li><a href="{% url 'login' %}">Ingresar a banca online</a></li>
+                        <li><a href="#">Hacerme Cliente</a></li>
+                        {% else %}
+
+                        <li><a href="{% url 'home' %}">Ir a homebanking</a></li>
+                        <li><a href="{% url 'logout' %}">Cerrar sesion</a></li>
+                        {% endif %}
+
+                        <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')">
+                            <a href="#">Personas<span class="icon-down-open"></span></a>
+                            <ul id="submenu1" class="submenu-inactive">
+                                <li><a href="./index.html">Inicio</a></li>
+                                <li><a href="#">Tarjetas</a></li>
+                                <li><a href="#">Prestamos</a></li>
+                                <li><a href="#">Inversiones</a></li>
+                                <li><a href="#">Seguros y asistencias</a></li>
+                            </ul>
+                        </li>
+                        <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')">
+                            <a href="#">Empresas<span class="icon-down-open"></span></a>
+                            <ul id="submenu2" class="submenu submenu-inactive">
+                                <li><a href="./indexE.html">Inicio</a></li>
+                                <li><a href="#">Tarjetas</a></li>
+                                <li><a href="#">Financiación</a></li>
+                                <li><a href="#">Seguros</a></li>
+                                <li><a href="#">Corporativas</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#">Atención al cliente</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </nav>
+</header>
+{% endblock %}
+{% block content %}
+
+{% endblock %}

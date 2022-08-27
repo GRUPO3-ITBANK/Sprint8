@@ -1,0 +1,81 @@
+{% extends 'ITBA/base-footer.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+{% block css %}
+<link href="{% static 'ITBA/css/home.css' %}" rel="stylesheet" />
+<link href="{% static 'ITBA/css/home2.css' %}" rel="stylesheet" />
+{% endblock %}
+<!-- Agrego titulo -->
+{% block title %}Home{% endblock %}
+<!-- Agrego contenido -->
+{% block header %}
+<header class="shadow-lg">
+    <!-- NAVBAR -->
+    <nav class="navbar bg-color">
+        <div class="container-fluid ">
+
+            <!-- LOGO -->
+            <a href="{% url 'index' %}">
+                <img class="logo" src="{% static 'ITBA/img/LOGO.png' %}" class="d-inline-block align-text-top" />
+            </a>
+
+            <!-- DESPLEGABLE -->
+            <div class="header-menu text-white ">
+                <input type="checkbox" id="btn-menu">
+                <label for="btn-menu" class="icon-menu text-light" onclick="desplegarHamburguesa()"></label>
+            </div>
+
+            <div class="action-p">
+                <div class="profile-p" onclick="menuToggle();">
+                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBIRERERFREPEQ8PDxESERIRDxEPEhESGBUaGRgYGBgcIS4lHB4rHxgYJjgmKy8xNjU1HCQ7QDs0Py40NTEBDAwMDw8QGBISGDQhGCE0NDQxNDE0NDE0MTQ0NDQ0NDQ0NDQ0NDQxMTE0NDE0NDQ0MTE0NDQ0NDQ0NDE0NDQ0NP/AABEIALcBEwMBIgACEQEDEQH/xAAbAAACAwEBAQAAAAAAAAAAAAAAAQIDBAUGB//EADwQAAICAQICBggEBQIHAAAAAAABAhEDBBIhMQUiQVFhcQYTMoGRobHBQlJi0SOS0uHwFHIWNENzgqLx/8QAGwEBAQADAQEBAAAAAAAAAAAAAAECAwQFBgf/xAAvEQACAgEDAwEGBQUAAAAAAAAAAQIRAwQSITFBUSIFEzJhcYFSscHR8BQVIySh/9oADAMBAAIRAxEAPwD31gRA/Mz2CVhYAQlErCyKGAMBWKwCQCAhBgIAAAABRhYhFBKxCsABiAiCjEArKWgALAALEAMpQACNlAwAiCgIBFKMQCKUYCAUC8BWOzCjALGRGQgyRAAKJgRAEJARGQDAQWAMBBYAwIgUEiIBYAA2I4vpD0hlxxji08JT1OZPbUdyxwXOb7PBXw+j24cUss1CPVlOtkyxj7UoxX6pKP1FjyxmrjKMl3xkpL5HzbpDozU44LJmnkeSUqW6pzbf6nwS8EZdPDPjVxyTg37W2Ulfj3ntf2RuPGT1fTj9zU8qT5R9XsLPD9C+kuSDUMzc4XTk+M4ePij2kZqSUk04tJprimmeXqdJl08qn36PszbGSkuCwCNjOYohAAKAgEUoAAilAAE2UowIgAaAIkjA1gABZAFjsVgAMBBYoDAVhYoDCwAUQLAAFALABCgMBAKLQOVcXwS5+BHQxjK8icZOdVKLUlsXspPu+7ZVrNzhNQe3I4vY9u+n5HM6Jx5NLjzOUU3PNKeOONSue7nJxfstvn42e97HwL1ZX24X6/sYS8I7vSejhlxuEoppr4Hx30rxZtHk23eOdvHL6o99pen8zm4ZXpblbxw3ZMWSUba7bT5VfI5Hpnsz6TI9tOEXONqpRa5r6n0F1JV0NLjcX5PL49Ruhjn2zhG/Ov7ns/QnpJzx5MLdvE1KH/bl2e5/U+dYsr9Vj8IKv5Uek9DsrhrEuycJRfwtfOJy+0sKyaeflcr7GOGXrSPpKZIqUiakfG0dzQwCwsEATYWRKUYARKUbEAgBgRsAWi+xkQMDCiVhYrAEHZIgMAkBAdghICNhYBIBWFkAwFYWAMBWKygkRbATYKZtRqnjnBKDlu500kq4/Eo0PSccuSTljyQptbZwdKK4XuXCh67H6xSg4KcY+qlKMlcZVJuvkZ8ymuGHdFurhnn63HXak/bi/J14H1ns5P8Ap4GMl/P5yX9NdFaXJGM5x3bHuh1q2vnwfNfE8V6W62MdNlUUlujsim26vgeg1rkrUsi2wj1km2lL8qb50fPvSLVY8j2W/b4Urt+J3RuUl4Nc6jB+WY3HaoQ7or5Kju+jzktZib/Ptfd2/uc+cF6yu1Qk3/NL9jqdFf8ANxfdlv5ox1LvFP6M0Yl619T6PGRamZcUi6LPjGj0mi2yRWmOzExokKxAAAAKwUBMAKUAAAC4QgMaMCSAVhZCDAVgASGRsABhYgIB2AgAHYWIAB2AivLmUfMqVhJvhFgmc/Lr2rpJefFt+CMMdfklOS3KorlFJcXwVnRi008jpGTi1yzF036TS0WddT1mPI6aTpxcVz8bKNT6aSmupjcW17Xbx7n9zk+mDUs2KFOSdxdcXdXfyLPR3R+swqTVNNxXC+Fn1eKGzFGKOa25sxazVZ8/VUdkX2cfi+84eq0yjlxwVt3vm+9rke61eKGKDb4trgl/nBHh5TvUbnzk3S7uD4fU34+DXlXQ1TX8TLLsUa8nUn9zqdEK8+7un9P8ZghC4N9s5pL4pfdnV6Dj15S/W2vml9zRqXWKX0LjXrR7LTy5GyLObppG/Gz5Wa5O8vTHZBMdmklEgFYiEobACJSkiIMi2UtDAVgKKX2MiBiayVisQAExER2QDGRsLAJBZGxglEhWIACQrEMAUpUm+5HJebdJt9pu106g/HgchzS4vkuJ0YY2mzbjXVk9RPam+3b9TNpqhFt87lOT72kXZm9sbTW6SpPnSX7sw6/JSir813tu/sj2dLBKC8s1ZHz9DC9KtRl68VKKVvi1Unw4NHV02CODHtjFqEE3XMj0Rj4NvnUU/Pm/qdDNC4NPtVcrs1Z9TP3u2MqXQzxwjttrk8h0znnkTk1tjXDnfuX3ZytN0bJPdJdefCMVzjfe++vqer1Gm9Zkx7k4xU3ce3gm1fhyLHgjFPJS4OoLvl3+S4nfh1EpVH7nPkxLqef1GDa4wVPZ9eX1f/qzo9B6SVbrSg/ZVcZVzflZDPpZbeVTyezb/C+3y7F5yfad3R7VCNLbFRSXka9dlcYKK7lwQTbbL8SceBsxyOYs/wDES70zfikeHki+50mtMkmVRZYmaASsLIgSiUMVisVigOxBYmygYEbAtFNFgIDAwGMiFkoUSAjYWBRIBWFgDHZGwsEGFiAFHYWBFsAx9Jz4RXi2cvOntpLrNpJPk2+HE3a6XX8kivBFW2/w8vM7Mb2xTNsVwRWKTfWceoldJpePNvxOPqX6zLGKXVU7fwuvgl8TuZJKnHhx+Zy9Np5bsk+25qPm01f+dx14ctKTfWqRhON0bOjI1jv80pP58PlRrkV6aG2EY/likWHJke6cpeTbFUqMet21blt8atmX/Uxc1auK9jHzbXDjPuV11fj3LTrMW/neyPFpcNz7F5HE0ctuSXDrXwXZw4RS+NnqaGS2uPc5tQubOnqcbm7buSfu3Se36WaGtq4u2vgvJdhSmkq/Vj+Sf7Fesy8zHV3LIo/IuLiLZXpp3kk+5V8X/Y7GKRwNBL2n3yOxhmceePNCLOhGRamZoSLYyONo2F1isjYGFAlYrFYmy0QdisTZFstAlYELAtENVgRsLNdFolYyNhYoUSGQsLISiYEB2C0SAjYAgxibCKvlT8mjZHDkmrjFtfJN/kB2RkxyTXNJFeSaSttJLtbSRNklLa16vHcI5mun137voY/9VVrxJ66fXk+z+x57PqqySj3rcvv9j0cOHcq8FlKkd6OovtLYZ0l4Hn4arzLY6wzlgIpnejqfeSWovwOEtX4kv9Z4mt4C7zrZMi7+84sci9eorv8Ap/8AUQz6/wAfmZtEpSl6yvak0n4Lm/j9Dr00PdvdLoasj3cI66zW0lytyb8+X1ZTq58CzI1FcFXA5eqz29pLeWe5ldRjRr0UuC8TsYJHF0jOtgZozLkkWdHHIvizJjkXxkcMkbEXJjsrUh2Y0UnYmxWJslEJNkWyNibMqA7GR3AAa7CytMdmuik2wIWFigTsdkLFuFAssVkbCxQJ2FkLHYoBlxxnFxlGM4vnGUVKL80yqOl2qo5c8EuSU00vDrJ8CzcPcbIZcmP4JNfcNWUzeoim4ZYT7o5obb8HKP8ASec6b6W9dFYdTgyYpRlcdsnBNrk006mrSfaencjHr4xlCSnGMo7Xwkk1yPQ0/tLNF1P1L/prePxwec0HTmyEoTgsi5Y26lw8e5lebR+uyQyY42uKmm6ptclbKNT0elcobZL8kvaX+2X7/Ev0/TMYJJrbKCpKq4vtPSy5Yzhuxq5GqKadSfBKOmq01xTp8nXwJZdAmr4rxRfp+k4Nc17v88/ia8erT7jzpTyRfQ6EovucDP0dlSuDU14On8DnTzZE9rx5bXYoSl9D2nr14EXqI95nHVSXWFkeJdnR5PS6TLlkrx5oYl7UpQcGl4KVNnqIYoQglFJRiqVdhDNrYrtMOo6RVcGJyyZq4pBKMO/JXr9QlfE5GOe6VlOs1TnKv8RbpInXHHshz1OaU9zOxpew6mBnL0yOlhOHKbYm7Gy6DM0GXxkcckbEXJkrKUySZhRSywshYrJQJ2KyLYrLQJWMhYi0DVYWQsFI10CdhZXY9woE7HZXYbhQLLCyG4FIUCywsrcg3Cik9wbivcLcKJZOUzB0lkrHPyX1NUpHM6Wn/Dfmjbij6kGzjvIZIRhkyZZNqUoRXVdPqtv9i2UqTfcYdDBxlLLz3S2NfpX9z14R4k+5pk+g9RGEXajtS4VFuNeJgy9J5Mbq3JeZ09RUuVcOHmjG9LGXB8+4343GvUrNcr7FEfSJ9u9Pxi39CS6dUuU68019Scui0+yyE+iYoz/132Mf8nkHroy4vIv5kU6jWR2vbNN1wSfPz8CMuiU+KhKu+XUj8x4+i4wpte0+rFKt3lfF+bNiWLsyPf4I6eLdN85cfM62mRmnhpxfufdfgbdOjRllYSpnR05vxGHAbcTPOyHRE1wZdFmaDLos5mjIvTCypSJKRg0ZFlhZCwsUCTYrI2FigSsCFgKIaNw0yvcLcY0Wy2wsq3BuFCy2wsq3D3ChZZYWVbg3ChZbuFuK9wbhQsssW4rsi5l2iyc5nO6TleN+aNU5mDXSuL9xuxL1IjOTqFUJGDRccbjfGUpOPGrvmvubdXKscn3Jv5Hjuj+l9qUckd8OyS9tea7T2dPhlkhLb2ObLkjCSs9PHC1wfB+PAshi401zM+j1kJrqZFkivwvjKPufFG1Tl2err9Sf2NUtybT6mcaatAtLP8EmvDmgePMuaikvxNpJedjlly8lOEF+nG2/nIolit3KeWcl+bIopfAxV96K6LJyUes5Rb7JZOGNf7Y85v5eIoer4y3TnOXOTjTfgl2LwQoQ2u1s3Pt27pfF8RajU7FulOMF3tqC+PAtdkL7sMqTVU4+fP39wYDga/p2CW2Fzk/x1UUu2r5ne08uXibMmKUIrcqs0qcZS47HTws2QZgxM2Y2cE0bkaYstUjNGRZGRoaMi9SGpFSkPcY0ZFtjsq3BuJQss3BuK3IW4tCy2wKrAUC/cFgBiSxbx7hAKLYbw3gAoWPeLcACgLeJyGBaFichOYAEiNlM5HP6QyqMG5Ola/N9uIAdGFXNIxkzlZtRGUXH1jfD8rv3No+e5FUpLsUpJcbfB0AH0GhVbkvkcOr52/cIy42m01y7GvJm7B0tni0vWSa7p1P5vj8wA7pxjKLcldHIm4vh0ao+kWfj1cNrvjP+oP8AiPP+XCv/AAn/AFABqWmw/h/M3e8yfiZRm6azz/6jiu6EY4/muPzMMpuT4u5d7bk/iwA3Y4xiltSV+EaJSlJW3ZBy59rd8T3HRmTdjxy78cX8gA4tf8MTo03xM6mKRrhMYHhzR3pl0ZE1IANDRmTUgsAMSjTDcACgG4NwgFEHYgAUU//Z"
+                        alt="">
+                </div>
+                <div class="menu-p">
+                    <h3 id="UserNameLogged">{{ user.id_cliente.nombre}} {{user.id_cliente.apellido}}</h3>
+                    <ul>
+                        <li> <a href="#">Mi perfil</a></li>
+                        <li> <a href="#">Configuración</a></li>
+                        <li> <a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>
+<nav id="menu" class="menu menu-inactive shadow">
+    <ul>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu1" class="submenu submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')"><a href="#">Cuentas<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu2" class="submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu3')"><a href="#">Tarjetas<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu3" class="submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+        <li><a href="{% url 'prestamos' %}">Prestamos</a></li>
+        <li><a href="#">Contacto</a></li>
+    </ul>
+</nav>
+{%endblock%}
+{%block scripts%}
+<script src="{% static 'ITBA/js/home.js' %}"></script>
+{%endblock%}

@@ -1,0 +1,160 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Home{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<div class="col" id="main-contenedor" style="background: var(--gradient); height:800px; ">
+
+
+  <!-- MODAL DETALLE DE MOVIMIENTO -->
+  <div id="overlay" class="modal-content">
+    <div id="overlayHijo" class="modal-content shadow bg-white d-flex">
+      <div class="modal-header  rounded-top bg-light p-1 bg-opacity-50">
+        <p id='tituloModal' class="modal-title p-1 fs-5"></p>
+        <button type="button" class="btn-close" onclick="ocultar('overlay')"></button>
+      </div>
+      <div class="modal-body py-0 d-flex justify-content-center align-items-center" id="overlay-body">
+        <span id="detalleOperacion" class="text-center fs-5"></span>
+      </div>
+      <div class="modal-footer border-top-0 flex-wrap border-2 p-2 w-100">
+        <button type="button" class="btn btn-lg btn-light m-2">Imprimir</button>
+        <button type="button" class="btn btn-lg btn-primary" data-bs-dismiss="modal">Compartir</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md7" id="A">
+
+    <div class="dinero-disponible col-12 md-5 " id="padre-dineroDisponible" style="place-self: center;">
+      <div class="col" id="hijo-dineroDisponible">
+        <div class="columna-saldo w-100">
+          <h2 class="fw-bold d-flex h5 ps-5"><em>Cuentas ($)</em></h2>
+          <div class="container">
+            <div class="row ms-4 me-4 mb-2">
+              <div class="col-auto me-auto flex-fill">
+              </div>
+
+            </div>
+            <div class="ms-4 me-4">
+              <table id="cuentas" class="table table-hover">
+                <tbody id="cuentasBody">
+                  <tr>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        <div class="fw-semibold ">Caja de ahorro</div>
+
+                        <div>$ <span><span>{{totalCajaAhorro}}</span>
+                        </div>
+
+                      </div>
+                      <div class="d-flex justify-content-between fw-lighter">
+                        <div>Cta. N° <span id="nCuenta">xxxxxxxxx</span></div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        <div class="fw-semibold ">Cuenta Corriente</div>
+                        <div>$ <span id="saldoCajaAhorro">0,00<span></span></div>
+                      </div>
+                      <div class="d-flex justify-content-between fw-lighter">
+                        <div>Cta. N° <span id="nCuenta">xxxxxxxxx</span></div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col" id="hijo-dineroDisponible">
+        <div class="columna-saldo w-100">
+          <h2 class="fw-bold d-flex h5 ps-5"><em>Tarjetas</em></h2>
+          <div class="container">
+            <div class="row ms-4 me-4 mb-2">
+              <div class="col-auto me-auto flex-fill">
+              </div>
+            </div>
+            <div class="ms-4 me-4">
+              <table id="cuentas" class="table table-hover">
+                <tbody id="cuentasBody">
+                  <tr>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        <div class="fw-semibold ">Tarjeta</div>
+                      </div>
+                      <div class="d-flex justify-content-between fw-lighter">
+                        <div>N° <span id="nCuenta">xxxxxxxxx</span></div>
+                        <div></div>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <div class="d-flex justify-content-between">
+                        <div class="fw-semibold ">Tarjeta</div>
+                      </div>
+                      <div class="d-flex justify-content-between fw-lighter">
+                        <div>N° <span id="nCuenta">xxxxxxxxx</span></div>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--  B -->
+  <div class="col-12 md-5" id="B">
+    <div class="dinero-disponible col-12  md-5 " id="padre-ultimosmovimientos">
+      <div class="col" id="hijo-ultimosmovimientos">
+        <h2 class="fw-bold d-flex h5 ps-5"><em>Últimos movimientos</em></h2>
+        <div class="container">
+
+          <div class="row ms-4 me-4 mb-2">
+            <div class="col-auto me-auto flex-fill">
+              <div class="input-group input-group-sm">
+                <span class="input-group-text"><svg class="svg-inline--fa fa-magnifying-glass" aria-hidden="true"
+                    focusable="false" data-prefix="fas" data-icon="magnifying-glass" role="img"
+                    xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" data-fa-i2svg="">
+                    <path fill="currentColor"
+                      d="M500.3 443.7l-119.7-119.7c27.22-40.41 40.65-90.9 33.46-144.7C401.8 87.79 326.8 13.32 235.2 1.723C99.01-15.51-15.51 99.01 1.724 235.2c11.6 91.64 86.08 166.7 177.6 178.9c53.8 7.189 104.3-6.236 144.7-33.46l119.7 119.7c15.62 15.62 40.95 15.62 56.57 0C515.9 484.7 515.9 459.3 500.3 443.7zM79.1 208c0-70.58 57.42-128 128-128s128 57.42 128 128c0 70.58-57.42 128-128 128S79.1 278.6 79.1 208z">
+                    </path>
+                  </svg>
+                </span>
+                <input class="form-control" type="text" placeholder="Buscar movimientos">
+              </div>
+            </div>
+
+          </div>
+          <div class="ms-4 me-4">
+            <table id="movimientos" class="table table-hover">
+
+              <tbody id="cuerpoMovimientos">
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'ITBA/js/home.js' %}"></script>
+<script src="{% static 'ITBA/js/movimientos.js' %}"></script>
+{% endblock %}
