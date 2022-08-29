@@ -1,3 +1,5 @@
+![image](https://user-images.githubusercontent.com/29070543/187229496-ce20ab19-07a7-407a-b6fb-447d24e77801.png)
+
 # Sprint 8
 
 ## Procesamiento Batch de Cheques
