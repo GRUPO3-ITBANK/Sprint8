@@ -1,6 +1,9 @@
+![image](https://user-images.githubusercontent.com/29070543/187229726-30dc4bf7-4cde-4954-b0b6-272454f8a645.png)
+
+
 # Sprint 8
 
-## Procesamiento Bach de Cheques
+## Procesamiento Batch de Cheques
 
 ---------------
 Problematica
