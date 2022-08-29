@@ -31,7 +31,11 @@
                         alt="">
                 </div>
                 <div class="menu-p">
+                    {% if not request.user.is_staff %}
                     <h3 id="UserNameLogged">{{ user.id_cliente.nombre}} {{user.id_cliente.apellido}}</h3>
+                    {% else %}
+                    <h3 id="UserNameLogged">Superusuario</h3>
+                    {% endif %}
                     <ul>
                         <li> <a href="#">Mi perfil</a></li>
                         <li> <a href="#">Configuración</a></li>
@@ -43,6 +47,7 @@
     </nav>
 </header>
 <nav id="menu" class="menu menu-inactive shadow">
+    {% if not request.user.is_staff %}
     <ul>
         <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
                     class="icon-down-open"></span></a>
@@ -74,6 +79,38 @@
         <li><a href="{% url 'prestamos' %}">Prestamos</a></li>
         <li><a href="#">Contacto</a></li>
     </ul>
+    {% else %}
+    <ul>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu1" class="submenu submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')"><a href="#">Cuentas<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu2" class="submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+        <li class="idSubmenu" onclick="desplegarSubmenu('submenu3')"><a href="#">Tarjetas<span
+                    class="icon-down-open"></span></a>
+            <ul id="submenu3" class="submenu-inactive">
+                <li><a href="#">Sub item1</a></li>
+                <li><a href="#">Sub item2</a></li>
+                <li><a href="#">Sub item3</a></li>
+                <li><a href="#">Sub item4</a></li>
+            </ul>
+        </li>
+
+    </ul>
+    {% endif %}
 </nav>
 {%endblock%}
 {%block scripts%}

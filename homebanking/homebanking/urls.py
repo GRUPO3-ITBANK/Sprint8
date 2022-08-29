@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from API.views import ClienteDetails
 import registration, ITBA,  Prestamos, Login
 from Login import views
 from Prestamos import views
@@ -29,5 +30,8 @@ urlpatterns = [
     path('logout-session/', registration.views.logout, name='logout-session'),
     path('accounts/',include('django.contrib.auth.urls')),
     path('prestamos/', Prestamos.views.prestamos, name="prestamos"),
-    path('alta-usuario/', Login.views.alta_usuario, name="alta_usuario"),
+    path('alta-user/', Login.views.alta_user, name="alta-user"),
+    path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
+    path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
+    path('API/clientes/<int:pk>/',ClienteDetails.as_view()),
 ]

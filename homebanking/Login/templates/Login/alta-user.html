@@ -1,0 +1,28 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Alta de usuarios nuevos{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<section class="vh-100" style="background: var(--gradient);">
+    <div class="container py-5 h-100">
+        <div class="row justify-content-center align-items-center h-100">
+            <div class="col-12 col-lg-9 col-xl-7">
+                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
+                    <div class="card-body p-4 p-md-5">
+                        <h3>Alta de usuarios</h3>
+                        <p>Elija que clase de usuario quiere dar de alta</p>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn-group d-flex w-50" role="group" aria-label="Basic example">
+                                <a class="btn btn-lg btn-success" href="{% url 'alta-user-cl' %}">Cliente</a>
+                                <a class="btn btn-lg btn-secondary" href="{% url 'alta-user-empl' %}">Empleado</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
