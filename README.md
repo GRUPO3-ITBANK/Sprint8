@@ -1,6 +1,6 @@
 # Sprint 8
 
-## Procesamiento Bach de Cheques
+## Procesamiento Batch de Cheques
 
 ---------------
 Problematica
