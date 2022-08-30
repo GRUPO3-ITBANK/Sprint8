@@ -5,6 +5,6 @@ def perfil(request):
         if not (request.user.is_staff):
             return render(request, "Perfil/perfil.html")
         else:
-            return render(request, "Perfil/perfil.html")
+            return render(request, "ITBA/home.html")
     else:
         return render(request, "ITBA/index.html")
