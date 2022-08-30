@@ -47,9 +47,7 @@ class MyUser(AbstractUser):
     def is_staff(self):
         return self.is_admin
 
-    def __str__(self):
-        if self.is_admin == True :  
-            return "(Superuser) " + self.username
-        return "(Cliente comun) " + self.username
+    # def __str__(self):
+    #     return self.id
 
 

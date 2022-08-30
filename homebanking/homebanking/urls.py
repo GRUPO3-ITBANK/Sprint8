@@ -35,5 +35,6 @@ urlpatterns = [
     path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
     path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
     path('API/clientes/<int:pk>/',ClienteDetails.as_view()),
+    path('API/clientes/',ClienteDetails.as_view()),
     path('perfil/', Perfil.views.perfil, name="perfil" ),
 ]

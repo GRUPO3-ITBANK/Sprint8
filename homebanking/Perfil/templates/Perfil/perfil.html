@@ -7,5 +7,63 @@
 {% block content %}
 <div class="d-flex align-items-center justify-content-center" style="background: var(--gradient); height:700px">
 
+
+    <div class="card" style="width: 30rem;">
+        <div class="card-body">
+            <h5 class="card-title">
+                <a id="nombre"></a> (<a id="tipoCliente"></a>)
+            </h5>
+            <p class="mb-0" id="dni">DNI</p>
+            <p class="mb-0" id="mail">Mail</p>
+            <p class="mb-0" id="dob">Fecha de nacimiento</p>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">CBU y Alias</li>
+            <li class="list-group-item">Seguridad</li>
+            <li class="list-group-item">Tus tarjetas</li>
+            <li class="list-group-item">Direcciones</li>
+            <li class="list-group-item">Privacidad</li>
+            <li class="list-group-item">Comunicaciones</li>
+            <li class="list-group-item">Tu plan</li>
+        </ul>
+        <div class="card-body">
+            <a href="#" class="card-link">Ayuda</a>
+            <a href="#" class="card-link">Configuración</a>
+        </div>
+    </div>
+
 </div>
+
+
+<script>
+    function traerDatosCliente() {
+        fetch("http://127.0.0.1:8000/API/clientes/", {
+            mode: 'no-cors'
+        })
+            .then((resp) => resp.json()) //recibo objeto de la request y lo convierto en objeto json
+            .then(function (data) {
+                //proceso json
+                let list = data;
+                console.log(data);
+
+                let htmlNombre = document.getElementById("nombre")
+                let htmlTipo = document.getElementById("tipoCliente")
+                let htmlMail = document.getElementById("mail")
+                let htmlNac = document.getElementById("dob")
+                let htmlDNI = document.getElementById("dni")
+
+                htmlNombre.innerHTML = data.nombre + " " + data.apellido
+                htmlMail.innerHTML = "Mail: " + data.email
+                htmlTipo.innerHTML = data.tipo_cliente
+                htmlNac.innerHTML = "Fecha de nacimiento: " + data.fecha_de_nac
+                htmlDNI.innerHTML = "DNI: " + data.DNI
+
+            });
+    }
+
+    traerDatosCliente();
+
+
+</script>
 {% endblock %}
