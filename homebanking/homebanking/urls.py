@@ -16,7 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from API.views import ClienteDetails
-import registration, ITBA,  Prestamos, Login
+import registration, ITBA,  Prestamos, Login, Perfil
+from Perfil import views
 from Login import views
 from Prestamos import views
 from ITBA import views
@@ -34,4 +35,5 @@ urlpatterns = [
     path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
     path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
     path('API/clientes/<int:pk>/',ClienteDetails.as_view()),
+    path('perfil/', Perfil.views.perfil, name="perfil" ),
 ]
