@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from rest_framework import status
 from Clientes.models import Cliente
 from Cuentas.models import Cuenta
-from API.serializers import ClienteSerializer, CuentaSerializer
+from Prestamos.models import Prestamo
+from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer
 
 class ClienteDetails(APIView):
     # def get(self, request, pk):
@@ -26,7 +27,17 @@ class ClienteDetails(APIView):
 class CuentaDetails(APIView):
     def get(self, request):
         if request.user.is_authenticated:
-            serializer = CuentaSerializer(Cuenta.objects.filter(pk=Cuenta.objects.get(ID_cliente=request.user.id_cliente.id).id).first())
+            serializer = CuentaSerializer(Cuenta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True)
             return Response(serializer.data, status=status.HTTP_200_OK)
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
+
+class PrestamoDetails(APIView):
+    def get(self, request):
+        if request.user.is_authenticated:
+            serializer = PrestamoSerializer(Prestamo.objects.filter(ID_cliente=request.user.id_cliente.id), many=True)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        else: 
+            return Response( status=status.HTTP_401_UNAUTHORIZED)
+
+

@@ -4,9 +4,17 @@ from django.urls import reverse
 from .models import Prestamo
 from Cuentas.models import Cuenta
 from Clientes.models import Cliente
+
 def prestamos(request):
     if not (request.user.is_authenticated):
         return render(request, 'ITBA/index.html')
+    else:
+        return render(request, 'Prestamos/prestamos.html')
+
+def solicitud_prestamo(request):
+    if not (request.user.is_authenticated):
+        return render(request, 'ITBA/index.html')
+
     if request.method == "POST":
         fecha_prestamo = request.POST.get('fecha_prestamo')
         tipo = request.POST.get('tipo')
@@ -15,11 +23,11 @@ def prestamos(request):
         tipo_cliente = (request.user.id_cliente.tipo_cliente).lower()
 
         if tipo_cliente == "classic" and total > 100000:
-            return redirect(reverse('prestamos')+"?classic")
+            return redirect(reverse('solicitud-prestamo')+"?classic")
         if tipo_cliente == "gold" and total > 300000:
-            return redirect(reverse('prestamos')+"?gold")
+            return redirect(reverse('solicitud-prestamo')+"?gold")
         if tipo_cliente == "black" and total > 500000:
-            return redirect(reverse('prestamos')+"?black")
+            return redirect(reverse('solicitud-prestamo')+"?black")
         else:
             Prestamo(fecha_prestamo=fecha_prestamo,tipo=tipo, total=total, ID_cliente=ID_cliente).save()
 
@@ -27,5 +35,5 @@ def prestamos(request):
             cuenta_id_cliente.balance= cuenta_id_cliente.balance + total
             cuenta_id_cliente.save()
             print(cuenta_id_cliente.balance)
-        return redirect(reverse('prestamos')+"?ok")
-    return render(request, 'Prestamos/prestamos.html')
+        return redirect(reverse('solicitud-prestamo')+"?ok")
+    return render(request, 'Prestamos/solicitud-prestamo.html')

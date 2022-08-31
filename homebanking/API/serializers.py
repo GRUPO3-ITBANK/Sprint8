@@ -35,6 +35,7 @@ class CuentaSerializer(serializers.HyperlinkedModelSerializer):
         model = Cuenta
         fields = ['ID_cliente_id','balance','iban', 'tipo_cuenta']
 
+
 class TarjetaSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Tarjeta

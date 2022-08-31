@@ -53,7 +53,7 @@
                 let htmlDNI = document.getElementById("dni")
                 htmlNombre.innerHTML = data.nombre + " " + data.apellido
                 htmlMail.innerHTML = "Mail: " + data.email
-                htmlTipo.innerHTML = data.tipo_cliente
+                htmlTipo.innerHTML = "Cliente: " + data.tipo_cliente.toUpperCase()
                 htmlNac.innerHTML = "Fecha de nacimiento: " + data.fecha_de_nac
                 htmlDNI.innerHTML = "DNI: " + data.DNI
             });

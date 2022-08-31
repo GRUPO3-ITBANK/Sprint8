@@ -134,26 +134,32 @@
           console.log(data);
 
           let tbody = document.getElementById("cuentasBody");
-          let tr = document.createElement("tr");
-          let td = document.createElement("td")
-          let div1 = document.createElement("div")
-          div1.classList = "d-flex justify-content-between"
-          let divNombreCuenta = document.createElement("div")
-          divNombreCuenta.classList = "fw-semibold"
-          let divTotal = document.createElement("div")
-          let div2 = document.createElement("div")
-          div2.classList = "d-flex justify-content-between fw-lighter"
-          let divNumCta = document.createElement("div")
 
-          divNombreCuenta.textContent = data.tipo_cuenta.toUpperCase();
-          divTotal.textContent = "$" + data.balance;
-          divNumCta.textContent = data.iban
+          for (let d of list) {
+            let tr = document.createElement("tr");
+            let td = document.createElement("td")
+            let div1 = document.createElement("div")
+            div1.classList = "d-flex justify-content-between"
+            let divNombreCuenta = document.createElement("div")
+            divNombreCuenta.classList = "fw-semibold"
+            let divTotal = document.createElement("div")
+            let div2 = document.createElement("div")
+            div2.classList = "d-flex justify-content-between fw-lighter"
+            let divNumCta = document.createElement("div")
 
-          div1.append(divNombreCuenta, divTotal)
-          div2.append(divNumCta)
-          td.append(div1, div2)
-          tr.append(td)
-          tbody.append(tr)
+            divNombreCuenta.textContent = d.tipo_cuenta.toUpperCase();
+            divTotal.textContent = "$" + d.balance;
+            divNumCta.textContent = d.iban
+
+            div1.append(divNombreCuenta, divTotal)
+            div2.append(divNumCta)
+            td.append(div1, div2)
+            tr.append(td)
+            tbody.append(tr)
+
+          }
+
+
 
         });
     }
@@ -163,18 +169,19 @@
 
 
   {% else %}
+  <!-- Lo que se mostraria para un superusuario -->
+
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
           <div class="card-body p-4 p-md-5">
-            <h3>Superusuario</h3>
-            <p>Panel</p>
+            <h3>Panel superusuario</h3>
             <div class="d-flex justify-content-center">
 
-              <a class="btn btn-lg btn-success" href="{% url 'alta-user' %}">Dar alta usuario</a>
-
-
+              <a class="btn btn-lg btn-success m-2" href="{% url 'alta-user' %}">Dar alta usuario</a>
+              <a class="btn btn-lg btn-secondary m-2" href="{% url 'alta-user' %}">Dar alta cliente</a>
+              <a class="btn btn-lg btn-secondary m-2" href="{% url 'alta-user' %}">Dar alta empleado</a>
             </div>
           </div>
         </div>

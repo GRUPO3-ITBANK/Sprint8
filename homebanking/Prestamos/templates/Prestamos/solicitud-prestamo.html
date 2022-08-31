@@ -1,0 +1,67 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Prestamos{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<div class="d-flex align-items-center justify-content-center" style="background: var(--gradient); height:700px; ">
+    <div class="d-flex justify-content-center bg-light rounded p-4">
+        <form action="" method="POST" style="width:30rem;">
+            {% if 'ok' in request.GET %}
+            <P class="text-success">Su prestamo se solicitó correctamente</P>
+            {% endif %}
+            {% if 'classic' in request.GET %}
+            <P class="text-danger">Su prestamo excede los 100000, supera su limite como cliente Classic</P>
+            {% endif %}
+            {% if 'gold' in request.GET %}
+            <P class="text-danger">Su prestamo excede los 300000, supera su limite como cliente Gold</P>
+            {% endif %}
+            {% if 'black' in request.GET %}
+            <P class="text-danger">Su prestamo excede los 500000, supera el limite permitido</P>
+            {% endif %}
+            {% csrf_token %}
+
+            <table>
+                <p class="p-2 h5 "><strong>
+                        Solicitud de prestamo
+                    </strong></p>
+
+                <div class="ps-2 mb-3">
+                    <b><small>Monto ($)</small></b>
+                    <input type="number" min=1 name="total" required="" id="total" class="form-control">
+                </div>
+
+
+
+
+                <div class='ps-2 mb-4'>
+                    <b><small>Tipo de prestamo</small></b>
+                    <select class="form-select" aria-label="Default select example" required="" name="tipo">
+                        <option selected></option>
+                        <option value="Hipotecario">Hipotecario</option>
+                        <option value="Prendario">Prendario</option>
+                        <option value="Personal">Personal</option>
+                    </select>
+                </div>
+
+                <div class='ps-2 mb-5'>
+                    <b><small>Fecha de inicio</small></b>
+                    <div class="md-form md-outline input-with-post-icon datepicker">
+                        <input placeholder="Select date" type="date" min="today" id="datePickerId" class="form-control"
+                            name="fecha_prestamo" required="">
+
+                    </div>
+                </div>
+            </table>
+            <div class="d-flex justify-content-center">
+                <input type="submit" value="Enviar" class="btn btn-dark" />
+            </div>
+    </div>
+    </form>
+</div>
+<script>
+    datePickerId.min = new Date().toISOString().split("T")[0];
+</script>
+{% endblock %}
+{{request.POST}}
