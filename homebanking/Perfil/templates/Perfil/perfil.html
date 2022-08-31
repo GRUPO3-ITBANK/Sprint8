@@ -46,24 +46,18 @@
                 //proceso json
                 let list = data;
                 console.log(data);
-
                 let htmlNombre = document.getElementById("nombre")
                 let htmlTipo = document.getElementById("tipoCliente")
                 let htmlMail = document.getElementById("mail")
                 let htmlNac = document.getElementById("dob")
                 let htmlDNI = document.getElementById("dni")
-
                 htmlNombre.innerHTML = data.nombre + " " + data.apellido
                 htmlMail.innerHTML = "Mail: " + data.email
                 htmlTipo.innerHTML = data.tipo_cliente
                 htmlNac.innerHTML = "Fecha de nacimiento: " + data.fecha_de_nac
                 htmlDNI.innerHTML = "DNI: " + data.DNI
-
             });
     }
-
     traerDatosCliente();
-
-
 </script>
 {% endblock %}

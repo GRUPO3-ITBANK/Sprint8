@@ -45,7 +45,8 @@ INSTALLED_APPS = [
     'Movimientos',
     'Empleados',
     'registration',
-    'Perfil'
+    'Perfil',
+    'API'
 ]
 
 MIDDLEWARE = [

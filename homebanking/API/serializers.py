@@ -9,7 +9,6 @@ from Prestamos.models import Prestamo
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        id_cliente = serializers.HyperlinkedRelatedField(view_name='cliente-detail',read_only=True)
         model = MyUser
         fields = ['id_cliente','username','email', 'date_joined']
 
@@ -26,21 +25,18 @@ class ClienteSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class PrestamoSerializer(serializers.HyperlinkedModelSerializer):
-    ID_cliente = serializers.HyperlinkedRelatedField(view_name='cliente-detail',read_only=True)
     class Meta:
         model = Prestamo
-        fields = ['fecha_prestamo', 'tipo', 'total', 'ID_cliente']
+        fields = ['fecha_prestamo', 'tipo', 'total', 'ID_cliente_id']
 
 
 class CuentaSerializer(serializers.HyperlinkedModelSerializer):
-    ID_cliente = serializers.HyperlinkedRelatedField(view_name='cliente-detail',read_only=True)
     class Meta:
         model = Cuenta
-        fields = ['ID_cliente','balance','iban', 'tipo_cuenta']
+        fields = ['ID_cliente_id','balance','iban', 'tipo_cuenta']
 
 class TarjetaSerializer(serializers.HyperlinkedModelSerializer):
-    ID_cliente = serializers.HyperlinkedRelatedField(view_name='cliente-detail',read_only=True)
     class Meta:
         model = Tarjeta
-        fields = ['numero','cvv','fecha_otorgamiento', 'fecha_vencimiento','tipo','marca','ID_cliente']
+        fields = ['numero','cvv','fecha_otorgamiento', 'fecha_vencimiento','tipo','marca','ID_cliente_id']
 
