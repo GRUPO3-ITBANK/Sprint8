@@ -1,6 +1,7 @@
 ![image](https://user-images.githubusercontent.com/29070543/187229726-30dc4bf7-4cde-4954-b0b6-272454f8a645.png)
 
 
+
 # Sprint 8
 
 ## Procesamiento Batch de Cheques
@@ -19,3 +20,5 @@ La API que vamos a desarrollar es privada, accesible sólo a usuarios registrado
 - ANULAR SOLICITUD DE PRESTAMO DE CLIENTE: Un empleado autenticado puede anular un préstamo para un cliente, revirtiendo el monto correspondiente.
 - MODIFICAR DIRECCION DE UN CLIENTE: El propio cliente autenticado o un empleado puede modificar las direcciones.
 - LISTADO DE TODAS LAS SUCURSALES: Un endpoint público que devuelve el listado todas las sucursales con la información correspondiente
+
+Superusuario: 9000 clave: 9000. Usuario de pruebas: 120 clave 120
