@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from API.views import ClienteDetails, CuentaDetails, PrestamoDetails, PrestamoList
+from API.views import ClienteList, CuentaList, PrestamoDetails, PrestamoList, TarjetaList
 import registration, ITBA,  Prestamos, Login, Perfil, Empleados
 from Perfil import views
 from Login import views
@@ -47,10 +47,10 @@ urlpatterns = [
 
     path('perfil/', Perfil.views.perfil, name="perfil" ),
 
-    path('API/clientes/',ClienteDetails.as_view()),
-    path('API/cuentas/',CuentaDetails.as_view()),
+    path('API/clientes/',ClienteList.as_view()),
+    path('API/cuentas/',CuentaList.as_view()),
     path('API/prestamos/',PrestamoList.as_view()),
     path('API/prestamos/<int:pk>/',PrestamoDetails.as_view()),
-
+    path('API/tarjetas/', TarjetaList.as_view()),
     
 ]
