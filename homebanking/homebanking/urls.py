@@ -15,28 +15,42 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from API.views import ClienteDetails, CuentaDetails, PrestamoDetails
-import registration, ITBA,  Prestamos, Login, Perfil
+from API.views import ClienteDetails, CuentaDetails, PrestamoDetails, PrestamoList
+import registration, ITBA,  Prestamos, Login, Perfil, Empleados
 from Perfil import views
 from Login import views
 from Prestamos import views
 from ITBA import views
 from registration import views
+from Empleados import views
 
 urlpatterns = [
     path('home/', ITBA.views.home, name="home"),
     path('', ITBA.views.init, name="init"),
     path('index/', ITBA.views.index, name="index"),
     path('admin/', admin.site.urls),
+
     path('logout-session/', registration.views.logout, name='logout-session'),
     path('accounts/',include('django.contrib.auth.urls')),
+
     path('solicitud-prestamo/', Prestamos.views.solicitud_prestamo, name="solicitud-prestamo"),
     path('prestamos/', Prestamos.views.prestamos, name="prestamos"),
+
+    path('home-superuser/', Login.views.home_super_user, name="home-superuser"),
+
+    path('home-empleado/', Empleados.views.home_empleado, name="home-empleado"),
+    path('prestamos-empl/', Empleados.views.prestamos_empl, name="prestamos-empl"),
+
     path('alta-user/', Login.views.alta_user, name="alta-user"),
     path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
     path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
+
     path('perfil/', Perfil.views.perfil, name="perfil" ),
+
     path('API/clientes/',ClienteDetails.as_view()),
     path('API/cuentas/',CuentaDetails.as_view()),
-    path('API/prestamos/',PrestamoDetails.as_view()),
+    path('API/prestamos/',PrestamoList.as_view()),
+    path('API/prestamos/<int:pk>/',PrestamoDetails.as_view()),
+
+    
 ]

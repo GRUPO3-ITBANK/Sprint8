@@ -1,4 +1,6 @@
 from django.db import models
+from Sucursales.models import Sucursal
+
 class Cliente(models.Model):
     
     email = models.EmailField(verbose_name='mail address',max_length=255)
@@ -12,7 +14,7 @@ class Cliente(models.Model):
         ('B','Black')
     )
     tipo_cliente = models.CharField(max_length=1,choices=TIPOS)
-
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.DO_NOTHING)
 
     class Meta:
         db_table = 'Clientes'

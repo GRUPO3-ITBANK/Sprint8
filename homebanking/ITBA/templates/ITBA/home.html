@@ -5,11 +5,9 @@
 {% block title %}Home{% endblock %}
 <!-- Agrego contenido -->
 {% block content %}
-<div class="col" id="main-contenedor" style="background: var(--gradient); height:800px; ">
-
+<div class="col" id="main-contenedor" style="background: var(--gradient); min-height:800px; ">
 
   <!-- MODAL DETALLE DE MOVIMIENTO -->
-  {% if not request.user.is_staff %}
   <div id="overlay" class="modal-content">
     <div id="overlayHijo" class="modal-content shadow bg-white d-flex">
       <div class="modal-header  rounded-top bg-light p-1 bg-opacity-50">
@@ -25,10 +23,13 @@
       </div>
     </div>
   </div>
+  <!-- FIN MODAL -->
+
+  <!-- Segmento cuentas y tarjetas -->
 
   <div class="col-md7" id="A">
-
     <div class="dinero-disponible col-12 md-5 " id="padre-dineroDisponible" style="place-self: center;">
+      <!-- cuentas -->
       <div class="col" id="hijo-dineroDisponible">
         <div class="columna-saldo w-100">
           <h2 class="fw-bold d-flex h5 ps-5">Cuentas ($)</h2>
@@ -36,18 +37,18 @@
             <div class="row ms-4 me-4 mb-2">
               <div class="col-auto me-auto flex-fill">
               </div>
-
             </div>
             <div class="ms-4 me-4">
               <table id="cuentas" class="table table-hover">
                 <tbody id="cuentasBody">
+                  <!-- aca se cargan los datos de cuentas -->
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
-
+      <!-- tarjetas -->
       <div class="col" id="hijo-dineroDisponible">
         <div class="columna-saldo w-100">
           <h2 class="fw-bold d-flex h5 ps-5">Tarjetas</h2>
@@ -59,43 +60,23 @@
             <div class="ms-4 me-4">
               <table id="cuentas" class="table table-hover">
                 <tbody id="cuentasBody">
-                  <tr>
-                    <td>
-                      <div class="d-flex justify-content-between">
-                        <div class="fw-semibold ">Tarjeta</div>
-                      </div>
-                      <div class="d-flex justify-content-between fw-lighter">
-                        <div>N° <span id="nCuenta">xxxxxxxxx</span></div>
-                        <div></div>
-                      </div>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <div class="d-flex justify-content-between">
-                        <div class="fw-semibold ">Tarjeta</div>
-                      </div>
-                      <div class="d-flex justify-content-between fw-lighter">
-                        <div>N° <span id="nCuenta">xxxxxxxxx</span></div>
-                      </div>
-                    </td>
-                  </tr>
+                  <!-- aca se cargan los datos de tarjetas -->
                 </tbody>
               </table>
             </div>
           </div>
         </div>
       </div>
+      <!-- fin tarjetas -->
     </div>
   </div>
 
-  <!--  B -->
+  <!--  segmento movimientos -->
   <div class="col-12 md-5" id="B">
     <div class="dinero-disponible col-12  md-5 " id="padre-ultimosmovimientos">
       <div class="col" id="hijo-ultimosmovimientos">
         <h2 class="fw-bold d-flex h5 ps-5">Últimos movimientos</h2>
         <div class="container">
-
           <div class="row ms-4 me-4 mb-2">
             <div class="col-auto me-auto flex-fill">
               <div class="input-group input-group-sm">
@@ -107,21 +88,19 @@
                 <input class="form-control" type="text" placeholder="Buscar movimientos">
               </div>
             </div>
-
           </div>
           <div class="ms-4 me-4">
             <table id="movimientos" class="table table-hover">
-
               <tbody id="cuerpoMovimientos">
               </tbody>
             </table>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
+  <!-- Script para traer datos -->
   <script>
     function traerDatosCuentas() {
       fetch("http://127.0.0.1:8000/API/cuentas/", {
@@ -156,39 +135,12 @@
             td.append(div1, div2)
             tr.append(td)
             tbody.append(tr)
-
           }
-
-
-
         });
     }
     traerDatosCuentas();
   </script>
 
-
-
-  {% else %}
-  <!-- Lo que se mostraria para un superusuario -->
-
-  <div class="container py-5 h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-          <div class="card-body p-4 p-md-5">
-            <h3>Panel superusuario</h3>
-            <div class="d-flex justify-content-center">
-
-              <a class="btn btn-lg btn-success m-2" href="{% url 'alta-user' %}">Dar alta usuario</a>
-              <a class="btn btn-lg btn-secondary m-2" href="{% url 'alta-user' %}">Dar alta cliente</a>
-              <a class="btn btn-lg btn-secondary m-2" href="{% url 'alta-user' %}">Dar alta empleado</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% endif %}
 </div>
 
 {% endblock %}

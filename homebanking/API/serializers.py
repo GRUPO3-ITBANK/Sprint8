@@ -7,36 +7,36 @@ from Tarjetas.models import Tarjeta
 from Empleados.models import Empleado
 from Prestamos.models import Prestamo
 
-class UserSerializer(serializers.HyperlinkedModelSerializer):
+class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = MyUser
         fields = ['id_cliente','username','email', 'date_joined']
 
-class EmpleadoSerializer(serializers.HyperlinkedModelSerializer):
+class EmpleadoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Empleado
         fields = ['nombre','apellido','fecha_contratacion','DNI']
 
 
-class ClienteSerializer(serializers.HyperlinkedModelSerializer):
+class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['nombre','apellido','DNI','email','fecha_de_nac','tipo_cliente']
+        fields = ['nombre','apellido','DNI','email','fecha_de_nac','tipo_cliente','sucursal']
 
 
-class PrestamoSerializer(serializers.HyperlinkedModelSerializer):
+class PrestamoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Prestamo
-        fields = ['fecha_prestamo', 'tipo', 'total', 'ID_cliente_id']
+        fields = ['fecha_prestamo', 'tipo', 'total', 'ID_cliente_id','sucursal']
 
 
-class CuentaSerializer(serializers.HyperlinkedModelSerializer):
+class CuentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cuenta
         fields = ['ID_cliente_id','balance','iban', 'tipo_cuenta']
 
 
-class TarjetaSerializer(serializers.HyperlinkedModelSerializer):
+class TarjetaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tarjeta
         fields = ['numero','cvv','fecha_otorgamiento', 'fecha_vencimiento','tipo','marca','ID_cliente_id']

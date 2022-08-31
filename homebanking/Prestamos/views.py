@@ -21,7 +21,7 @@ def solicitud_prestamo(request):
         total = int(request.POST.get('total'))
         ID_cliente = Cliente.objects.filter(pk=request.user.id_cliente.id).first()
         tipo_cliente = (request.user.id_cliente.tipo_cliente).lower()
-
+        sucursal = request.user.id_cliente.sucursal
         if tipo_cliente == "classic" and total > 100000:
             return redirect(reverse('solicitud-prestamo')+"?classic")
         if tipo_cliente == "gold" and total > 300000:
@@ -29,9 +29,8 @@ def solicitud_prestamo(request):
         if tipo_cliente == "black" and total > 500000:
             return redirect(reverse('solicitud-prestamo')+"?black")
         else:
-            Prestamo(fecha_prestamo=fecha_prestamo,tipo=tipo, total=total, ID_cliente=ID_cliente).save()
-
-            cuenta_id_cliente = Cuenta.objects.get(ID_cliente=request.user.id_cliente.id)
+            Prestamo(fecha_prestamo=fecha_prestamo,tipo=tipo, total=total, ID_cliente=ID_cliente, sucursal=sucursal).save()
+            cuenta_id_cliente = Cuenta.objects.filter(ID_cliente=request.user.id_cliente.id).first()
             cuenta_id_cliente.balance= cuenta_id_cliente.balance + total
             cuenta_id_cliente.save()
             print(cuenta_id_cliente.balance)

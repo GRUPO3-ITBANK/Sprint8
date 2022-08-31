@@ -4,7 +4,12 @@ from Cuentas.models import Cuenta
 
 def init(request):
     if request.user.is_authenticated:
-        return render(request, "ITBA/home.html")
+        if request.user.is_staff:
+            return render(request, "Login/home-superuser.html")
+        if not (request.user.id_empleado_id == None):
+            return render(request, "Empleados/home-empleado.html")
+       
+        return render(request, "ITBA/home.html")  
     else:
         return render(request, "ITBA/index.html")
 
@@ -13,8 +18,12 @@ def index(request):
 
 def home(request):
     if request.user.is_authenticated:
-            return render(request, "ITBA/home.html")
-        
+        if request.user.is_staff:
+            return render(request, "Login/home-superuser.html")
+        if not (request.user.id_empleado_id == None):
+            return render(request, "Empleados/home-empleado.html")
+       
+        return render(request, "ITBA/home.html")  
     else:
         return render(request, "ITBA/index.html")
 

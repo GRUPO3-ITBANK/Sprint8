@@ -31,8 +31,8 @@ class MyUser(AbstractUser):
     username=models.CharField(max_length=50,blank=True,null=True, unique=True,verbose_name = "DNI")
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
-
     objects = MyUserManager()
+
 
     USERNAME_FIELD = 'username'
     REQUIRED_FIELDS = ['email']

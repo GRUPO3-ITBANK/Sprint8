@@ -3,7 +3,6 @@
 {% load static %}
 {% block css %}
 <link href="{% static 'ITBA/css/home.css' %}" rel="stylesheet" />
-<link href="{% static 'ITBA/css/home2.css' %}" rel="stylesheet" />
 {% endblock %}
 <!-- Agrego titulo -->
 {% block title %}Home{% endblock %}
@@ -13,12 +12,10 @@
     <!-- NAVBAR -->
     <nav class="navbar bg-color">
         <div class="container-fluid ">
-
             <!-- LOGO -->
             <a href="{% url 'home' %}">
                 <img class="logo" src="{% static 'ITBA/img/LOGO.png' %}" class="d-inline-block align-text-top" />
             </a>
-
             <!-- DESPLEGABLE -->
             <div class="header-menu text-white ">
                 <input type="checkbox" id="btn-menu">
@@ -32,22 +29,34 @@
                 </div>
                 <div class="menu-p">
                     {% if not request.user.is_staff %}
+                    {% if not request.user.id_empleado_id %}
                     <h3 id="UserNameLogged">{{ user.id_cliente.nombre}} {{user.id_cliente.apellido}}</h3>
-                    {% else %}
-                    <h3 id="UserNameLogged">Superusuario</h3>
-                    {% endif %}
                     <ul>
                         <li> <a href="{% url 'perfil' %}">Mi perfil</a></li>
                         <li> <a href="#">Configuración</a></li>
                         <li> <a href="{% url 'logout' %}">Cerrar sesión</a></li>
                     </ul>
+                    {% else %}
+                    <h3 id="UserNameLogged">{{user.id_empleado.nombre}} {{user.id_empleado.apellido}}</h3>
+                    <ul>
+                        <li> <a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>
+                    {% endif %}
+                    {% else %}
+                    <h3 id="UserNameLogged">Superusuario</h3>
+                    <ul>
+                        <li> <a href="{% url 'logout' %}">Cerrar sesión</a></li>
+                    </ul>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </nav>
 </header>
+{% if not request.user.is_staff %}
+{% if not request.user.id_empleado_id %}
 <nav id="menu" class="menu menu-inactive shadow">
-    {% if not request.user.is_staff %}
+
     <ul>
         <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
                     class="icon-down-open"></span></a>
@@ -80,39 +89,35 @@
         <li><a href="#">Contacto</a></li>
     </ul>
     {% else %}
-    <ul>
-        <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
-                    class="icon-down-open"></span></a>
-            <ul id="submenu1" class="submenu submenu-inactive">
-                <li><a href="#">Sub item1</a></li>
-                <li><a href="#">Sub item2</a></li>
-                <li><a href="#">Sub item3</a></li>
-                <li><a href="#">Sub item4</a></li>
-            </ul>
-        </li>
-        <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')"><a href="#">Cuentas<span
-                    class="icon-down-open"></span></a>
-            <ul id="submenu2" class="submenu-inactive">
-                <li><a href="#">Sub item1</a></li>
-                <li><a href="#">Sub item2</a></li>
-                <li><a href="#">Sub item3</a></li>
-                <li><a href="#">Sub item4</a></li>
-            </ul>
-        </li>
-        <li class="idSubmenu" onclick="desplegarSubmenu('submenu3')"><a href="#">Tarjetas<span
-                    class="icon-down-open"></span></a>
-            <ul id="submenu3" class="submenu-inactive">
-                <li><a href="#">Sub item1</a></li>
-                <li><a href="#">Sub item2</a></li>
-                <li><a href="#">Sub item3</a></li>
-                <li><a href="#">Sub item4</a></li>
-            </ul>
-        </li>
+    <nav id="menu" class="menu menu-inactive shadow">
 
-    </ul>
-    {% endif %}
-</nav>
-{%endblock%}
-{%block scripts%}
-<script src="{% static 'ITBA/js/home.js' %}"></script>
-{%endblock%}
+        <ul>
+            <li><a href="{% url 'prestamos-empl' %}">Prestamos</a></li>
+            <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Tarjetas<span
+                        class="icon-down-open"></span></a>
+                <ul id="submenu1" class="submenu submenu-inactive">
+                    <li><a href="#">Sub item1</a></li>
+                </ul>
+            </li>
+            <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')"><a href="#">Clientes<span
+                        class="icon-down-open"></span></a>
+                <ul id="submenu2" class="submenu-inactive">
+
+                </ul>
+            </li>
+            <li class="idSubmenu" onclick="desplegarSubmenu('submenu3')">
+                <ul id="submenu3" class="submenu-inactive">
+
+
+                </ul>
+            </li>
+
+        </ul>
+        {% endif %}
+        {% else %}
+        {% endif %}
+    </nav>
+    {%endblock%}
+    {%block scripts%}
+    <script src="{% static 'ITBA/js/home.js' %}"></script>
+    {%endblock%}

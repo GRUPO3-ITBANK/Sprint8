@@ -1,0 +1,83 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Home{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<div class="d-flex align-items-center justify-content-center"
+    style="flex-flow: column; background: var(--gradient); height:fit-content">
+    <div class="d-flex justify-content-center bg-light rounded p-4 " style="width:40rem; margin-top:70px;">
+        <div class="w-100">
+            <h5><strong>Solicitar prestamo: </strong></h5><a href="{% url 'solicitud-prestamo' %}">Formulario de
+                solicitud de prestamo</a>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center bg-light rounded p-4 mt-3 mb-5" style="width:40rem">
+        <di class="w-100">
+            <h5><strong>Prestamos por sucursal:</strong></h5>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Ingrese ID de sucursal" id="id_sucursal">
+                <div class="input-group-append">
+                    <span class="btn btn-outline-secondary"
+                        onclick="traerDatosPrestamos(document.getElementById('id_sucursal').value)">Buscar</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <table class="table table-hover">
+                    <tbody id="cuentasBody">
+
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+</div>
+<script>
+    function traerDatosPrestamos(id) {
+        let tbody = document.getElementById("cuentasBody");
+        tbody.innerHTML = " "
+        console.log("http://127.0.0.1:8000/API/prestamos/" + id + "/")
+        fetch("http://127.0.0.1:8000/API/prestamos/" + id + "/", {
+            mode: 'no-cors'
+        })
+            .then((resp) => resp.json()) //recibo objeto de la request y lo convierto en objeto json
+            .then(function (data) {
+                //proceso json
+                let list = data;
+                console.log(data);
+
+                let tbody = document.getElementById("cuentasBody");
+
+                for (let d of list) {
+                    let tr = document.createElement("tr");
+                    let td = document.createElement("td")
+                    let div1 = document.createElement("div")
+                    div1.classList = "d-flex justify-content-between"
+                    let divTipo = document.createElement("div")
+                    divTipo.classList = "fw-semibold"
+                    let divTotal = document.createElement("div")
+                    let div2 = document.createElement("div")
+                    div2.classList = "d-flex justify-content-between fw-lighter"
+                    let divFecha = document.createElement("div")
+
+                    divTipo.textContent = d.tipo.toUpperCase();
+                    divTotal.textContent = "$" + d.total;
+                    divFecha.textContent = d.fecha_prestamo;
+
+                    div1.append(divTipo, divTotal)
+                    div2.append(divFecha)
+                    td.append(div1, div2)
+                    tr.append(td)
+                    tbody.append(tr)
+                }
+            });
+    }
+
+</script>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'ITBA/js/home.js' %}"></script>
+{% endblock %}
