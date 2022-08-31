@@ -21,4 +21,4 @@ La API que vamos a desarrollar es privada, accesible sólo a usuarios registrado
 - MODIFICAR DIRECCION DE UN CLIENTE: El propio cliente autenticado o un empleado puede modificar las direcciones.
 - LISTADO DE TODAS LAS SUCURSALES: Un endpoint público que devuelve el listado todas las sucursales con la información correspondiente
 
-Superusuario: 9000 clave: 9000. Usuario de pruebas: 120 clave 120
+Superusuario: 9000 clave: 9000. Usuario cliente de pruebas: 120 clave 120. Usuario empleado de pruebas: 200 clave 200
