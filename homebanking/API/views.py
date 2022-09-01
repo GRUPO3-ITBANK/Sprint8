@@ -82,7 +82,6 @@ class CuentaDetails(APIView):
 # ENDPOINTS PRESTAMOS
 class PrestamoDetails(APIView):
     def get(self, request,pk):
-        print("HOLA")
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None) or request.user.is_staff: #si es empleado... filtro los prestamos por sucursal
                 serializer = PrestamoSerializer(Prestamo.objects.filter(sucursal=pk), many=True) #Traigo los prestamos de la sucursal con id que me pide
@@ -93,7 +92,6 @@ class PrestamoDetails(APIView):
         return Response( status=status.HTTP_401_UNAUTHORIZED)
     
     def delete(self, request, pk):
-        print("JIJO")
         prestamo = Prestamo.objects.filter(pk=pk).first()
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None):
@@ -103,7 +101,7 @@ class PrestamoDetails(APIView):
                     cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
                     cuenta.balance= cuenta.balance - serializer.data['total']
                     cuenta.save()
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+                    return Response(serializer.data, status=status.HTTP_200_OK)
                 return Response(status=status.HTTP_404_NOT_FOUND)
             else:
                 return Response( status=status.HTTP_401_UNAUTHORIZED)
