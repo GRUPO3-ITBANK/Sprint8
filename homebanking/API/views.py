@@ -39,7 +39,7 @@ class PrestamoDetails(APIView):
     def get(self, request,pk):
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None) or request.user.is_staff: #si es empleado... filtro los prestamos por sucursal
-                serializer = PrestamoSerializer(Prestamo.objects.filter(sucursal=pk), many=True)
+                serializer = PrestamoSerializer(Prestamo.objects.filter(sucursal=pk), many=True) #Traigo los prestamos de la sucursal con id que me pide
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
                 serializer = PrestamoSerializer(Prestamo.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si tan solo es un cliente filtro los prestamos por id de cliente
@@ -59,22 +59,11 @@ class PrestamoList(APIView):
             return Response( status=status.HTTP_401_UNAUTHORIZED)
 
 
-# class TarjetaDetails(APIView):
-#     def get(self, request,pk):
-#         if request.user.is_authenticated:
-#             if not (request.user.id_empleado_id == None) or request.user.is_staff : #si es empleado... filtro por id de Usuario
-#                 serializer = TarjetaSerializer(Tarjeta.objects.filter(ID_cliente=pk), many=True)
-#                 return Response(serializer.data, status=status.HTTP_200_OK)
-#             else:
-#                 serializer = TarjetaSerializer(Tarjeta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si tan solo es un cliente filtro las tarjetas por id de cliente
-#                 return Response(serializer.data, status=status.HTTP_200_OK)
-#         return Response( status=status.HTTP_401_UNAUTHORIZED)
-
 class TarjetaList(APIView):
     def get(self, request):
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None) or request.user.is_staff: #si es empleado... traigo todas las tarjetas
-                serializer = TarjetaSerializer(Tarjeta.objects.all(), many=True)
+                serializer = TarjetaSerializer(Tarjeta.objects.all(), many=True) 
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
                 serializer = TarjetaSerializer(Tarjeta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True)
@@ -85,7 +74,7 @@ class TarjetaList(APIView):
     def post(self,request,format=None):
         serializer = TarjetaSerializer(data=request.data)
         if request.user.is_authenticated:
-            if not (request.user.id_empleado_id == None): #Si es empleado
+            if not (request.user.id_empleado_id == None):
                 if serializer.is_valid():
                     serializer.save()
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -93,7 +82,17 @@ class TarjetaList(APIView):
             return Response( status=status.HTTP_401_UNAUTHORIZED)
         return Response( status=status.HTTP_401_UNAUTHORIZED)
 
-
+class TarjetaDetails(APIView): 
+        def get(self, request,pk):
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None) or request.user.is_staff: 
+                    serializer = TarjetaSerializer(Tarjeta.objects.filter(ID_Cliente=pk), many=True) #FILTRO POR TARJETAS DE UN DETERMINADO CLIENTE
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    serializer = TarjetaSerializer(Tarjeta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #SI ES SOLO CLIENTE, SOLO PUEDE ACCEDER A VER SUS PROPIAS TARJETAS
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            else: 
+                return Response( status=status.HTTP_401_UNAUTHORIZED)
 
 
 
