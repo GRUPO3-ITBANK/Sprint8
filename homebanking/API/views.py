@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from Sucursales.models import Sucursal
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import status
@@ -6,7 +7,7 @@ from Clientes.models import Cliente
 from Cuentas.models import Cuenta
 from Prestamos.models import Prestamo
 from Tarjetas.models import Tarjeta
-from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer, TarjetaSerializer, ClienteSerializerDireccion
+from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer, TarjetaSerializer, ClienteSerializerDireccion, SucursalSerializer
 
 class ClienteList(APIView):
     def get(self, request):
@@ -160,5 +161,7 @@ class TarjetaDetails(APIView):
                 return Response( status=status.HTTP_401_UNAUTHORIZED)
 
 
-
-
+class SucursalesList(APIView):
+    def get(self, request):
+        serializer = SucursalSerializer(Sucursal.objects.all(), many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

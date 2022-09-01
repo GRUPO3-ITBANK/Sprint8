@@ -6,6 +6,7 @@ from Login.models import MyUser
 from Tarjetas.models import Tarjeta
 from Empleados.models import Empleado
 from Prestamos.models import Prestamo
+from Sucursales.models import Sucursal
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -45,3 +46,7 @@ class TarjetaSerializer(serializers.ModelSerializer):
         model = Tarjeta
         fields = ['numero','cvv','fecha_otorgamiento', 'fecha_vencimiento','tipo','marca','ID_cliente']
 
+class SucursalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Sucursal
+        fields = ['numero_sucursal','nombre_sucursal','direccion_sucursal']
