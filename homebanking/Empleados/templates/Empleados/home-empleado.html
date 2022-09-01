@@ -2,13 +2,13 @@
 <!-- Contenido estatico -->
 {% load static %}
 <!-- Agrego titulo -->
-{% block title %}Home{% endblock %}
+{% block title %}Empleados{% endblock %}
 <!-- Agrego contenido -->
 {% block content %}
-<div class="col" id="main-contenedor"
+<div class="col p-3" id="main-contenedor"
     style="background: var(--gradient); min-height:700px; height:fit-content; place-content:center;">
 
-    <div class="card m-2" style="height: fit-content; width:40rem;">
+    <div class="card m-4" style="height: fit-content;">
         <div class="card-header">
             <h5 class="card-title">Prestamos</h5>
         </div>
@@ -20,14 +20,24 @@
 
         </div>
     </div>
-    <div class="card m-4" style="height: fit-content; width:40rem;">
+    <div class="card m-4" style="height: fit-content; ">
         <div class="card-header">
-            <h5 class="card-title">Prestamos</h5>
+            <h5 class="card-title">Clientes</h5>
         </div>
         <div class="card-body">
 
-            <p class="card-text">Gestión de prestamos.</p>
+            <p class="card-text">Gestión de clientes.</p>
 
+        </div>
+    </div>
+    <div class="card m-4" style="height: fit-content;">
+        <div class="card-header">
+            <h5 class="card-title">Tarjetas</h5>
+        </div>
+        <div class="card-body">
+
+            <p class="card-text">Gestión de tarjetas.</p>
+            <a href="{% url 'tarjetas-empl' %}" class="btn btn-primary">Ver tarjetas por cliente</a>
         </div>
     </div>
 </div>
