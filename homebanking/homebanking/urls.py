@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from API.views import ClienteList,ClienteDetails, CuentaList, PrestamoDetails, PrestamoList, TarjetaList, SucursalesList
+from API.views import ClienteList,ClienteDetails, CuentaList, PrestamoDetails, PrestamoList, TarjetaList, SucursalesList, TarjetaDetails
 import registration, ITBA,  Prestamos, Login, Perfil, Empleados
 from Perfil import views
 from Login import views
@@ -53,6 +53,7 @@ urlpatterns = [
     path('API/prestamos/',PrestamoList.as_view()),
     path('API/prestamos/<int:pk>/',PrestamoDetails.as_view()),
     path('API/tarjetas/', TarjetaList.as_view()),
+    path('API/tarjetas/<int:pk>/', TarjetaDetails.as_view()),
     path('API/sucursales/', SucursalesList.as_view()),
     
 ]
