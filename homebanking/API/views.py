@@ -58,6 +58,21 @@ class PrestamoList(APIView):
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
 
+    def post(self,request,format=None):
+        serializer = PrestamoSerializer(data=request.data)
+        if request.user.is_authenticated:
+            if not (request.user.id_empleado_id == None):
+                if serializer.is_valid():
+                    serializer.save()
+                    cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
+                    print(cuenta)
+                    cuenta.balance= cuenta.balance + serializer.data['total']
+                    print(cuenta.balance)
+                    cuenta.save()
+                    return Response(serializer.data, status=status.HTTP_201_CREATED)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            return Response( status=status.HTTP_401_UNAUTHORIZED)
+        return Response( status=status.HTTP_401_UNAUTHORIZED)
 
 class TarjetaList(APIView):
     def get(self, request):
