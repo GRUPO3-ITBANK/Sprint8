@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from API.views import ClienteList,ClienteDetails, CuentaList, PrestamoDetails, PrestamoList, TarjetaList, SucursalesList, TarjetaDetails
+from API.views import ClienteList,ClienteDetails, CuentaList, PrestamoDetails, PrestamoList, TarjetaList, SucursalesList, TarjetaDetails, CuentaDetails
 import registration, ITBA,  Prestamos, Login, Perfil, Empleados
 from Perfil import views
 from Login import views
@@ -40,6 +40,7 @@ urlpatterns = [
 
     path('home-empleado/', Empleados.views.home_empleado, name="home-empleado"),
     path('prestamos-empl/', Empleados.views.prestamos_empl, name="prestamos-empl"),
+    path('sol-prestamos-empl/', Empleados.views.sol_prestamos_empl, name="sol-prestamos-empl"),
 
     path('alta-user/', Login.views.alta_user, name="alta-user"),
     path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
@@ -50,6 +51,7 @@ urlpatterns = [
     path('API/clientes/',ClienteList.as_view()),
     path('API/clientes/<int:pk>/',ClienteDetails.as_view()),
     path('API/cuentas/',CuentaList.as_view()),
+    path('API/cuentas/<int:pk>/',CuentaDetails.as_view()),
     path('API/prestamos/',PrestamoList.as_view()),
     path('API/prestamos/<int:pk>/',PrestamoDetails.as_view()),
     path('API/tarjetas/', TarjetaList.as_view()),

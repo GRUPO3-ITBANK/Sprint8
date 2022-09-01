@@ -5,20 +5,29 @@
 {% block title %}Home{% endblock %}
 <!-- Agrego contenido -->
 {% block content %}
-<div class="col" id="main-contenedor" style="background: var(--gradient); height:800px; ">
+<div class="col" id="main-contenedor"
+    style="background: var(--gradient); min-height:700px; height:fit-content; place-content:center;">
 
-    <div class="container py-5 h-100">
-        <div class="row justify-content-center align-items-center h-100">
-            <div class="col-12 col-lg-9 col-xl-7">
-                <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-                    <div class="card-body p-4 p-md-5">
-                        <h3>Panel empleados</h3>
-                        <div class="d-flex justify-content-center">
+    <div class="card m-2" style="height: fit-content; width:40rem;">
+        <div class="card-header">
+            <h5 class="card-title">Prestamos</h5>
+        </div>
+        <div class="card-body">
 
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p class="card-text">Gestión de prestamos.</p>
+            <a href="{% url 'prestamos-empl'%}" class="btn btn-primary">Ver prestamos por sucursal</a>
+            <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary">Solicitar prestamo para cliente</a>
+
+        </div>
+    </div>
+    <div class="card m-4" style="height: fit-content; width:40rem;">
+        <div class="card-header">
+            <h5 class="card-title">Prestamos</h5>
+        </div>
+        <div class="card-body">
+
+            <p class="card-text">Gestión de prestamos.</p>
+
         </div>
     </div>
 </div>

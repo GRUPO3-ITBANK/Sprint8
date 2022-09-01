@@ -67,6 +67,18 @@ class CuentaList(APIView):
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
 
+class CuentaDetails(APIView):
+    def get(self, request,pk):
+        if request.user.is_authenticated:
+            if not (request.user.id_empleado_id == None) or request.user.is_staff: 
+                serializer = CuentaSerializer(Cuenta.objects.filter(ID_cliente=pk), many=True) 
+                return Response(serializer.data, status=status.HTTP_200_OK)
+            else:
+                serializer = CuentaSerializer(Cuenta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) 
+                return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response( status=status.HTTP_401_UNAUTHORIZED)
+
+
 # ENDPOINTS PRESTAMOS
 class PrestamoDetails(APIView):
     def get(self, request,pk):
@@ -111,16 +123,18 @@ class PrestamoList(APIView):
 
     def post(self,request,format=None):
         serializer = PrestamoSerializer(data=request.data)
+        print
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None):
                 if serializer.is_valid():
-                    if  not (MyUser.objects.filter(id_cliente_id=serializer.data["ID_cliente"]).first() == None): #SI ESTE CLIENTE NO ES UN USUARIO.. UNAUTHORIZED
+                    if  not (MyUser.objects.filter(id_cliente_id=serializer.validated_data["ID_cliente"]).first() == None): #SI ESTE CLIENTE NO ES UN USUARIO.. UNAUTHORIZED
+                        serializer.validated_data["sucursal"] = Cliente.objects.filter(pk=serializer.validated_data["ID_cliente"].id).first().sucursal
                         serializer.save()
                         cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
                         cuenta.balance= cuenta.balance + serializer.data['total']
                         cuenta.save()
                     else:
-                          return Response( status=status.HTTP_401_UNAUTHORIZED)
+                          return Response( status=status.HTTP_404_NOT_FOUND)
                     return Response(serializer.data, status=status.HTTP_201_CREATED)
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response( status=status.HTTP_401_UNAUTHORIZED)

@@ -6,13 +6,8 @@
 <!-- Agrego contenido -->
 {% block content %}
 <div class="d-flex align-items-center justify-content-center"
-    style="flex-flow: column; background: var(--gradient); height:fit-content">
-    <div class="d-flex justify-content-center bg-light rounded p-4 " style="width:40rem; margin-top:70px;">
-        <div class="w-100">
-            <h5><strong>Solicitar prestamo: </strong></h5><a href="{% url 'solicitud-prestamo' %}">Formulario de
-                solicitud de prestamo</a>
-        </div>
-    </div>
+    style="flex-flow: column; background: var(--gradient); min-height:700px; height:fit-content">
+
     <div class="d-flex justify-content-center bg-light rounded p-4 mt-3 mb-5" style="width:40rem">
         <di class="w-100">
             <h5><strong>Prestamos por sucursal:</strong></h5>
@@ -70,11 +65,10 @@
                     div2.append(divFecha)
                     td.append(div1, div2)
                     tr.append(td)
-                    tbody.append(tr)
+                    tbody.prepend(tr)
                 }
             });
     }
-
 </script>
 </div>
 {% endblock %}

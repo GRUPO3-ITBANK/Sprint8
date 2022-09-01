@@ -49,4 +49,4 @@ class TarjetaSerializer(serializers.ModelSerializer):
 class SucursalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Sucursal
-        fields = ['numero_sucursal','nombre_sucursal','direccion_sucursal']
+        fields = ['id','numero_sucursal','nombre_sucursal','direccion_sucursal']

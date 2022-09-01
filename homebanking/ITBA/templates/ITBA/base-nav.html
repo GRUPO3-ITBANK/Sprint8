@@ -17,10 +17,17 @@
                 <img class="logo" src="{% static 'ITBA/img/LOGO.png' %}" class="d-inline-block align-text-top" />
             </a>
             <!-- DESPLEGABLE -->
+            {% if not request.user.is_staff %}
+            {% if not request.user.id_empleado_id %}
             <div class="header-menu text-white ">
                 <input type="checkbox" id="btn-menu">
                 <label for="btn-menu" class="icon-menu text-light" onclick="desplegarHamburguesa()"></label>
             </div>
+            {% else %}
+            {% endif %}
+            {% else %}
+            {% endif %}
+
 
             <div class="action-p">
                 <div class="profile-p" onclick="menuToggle();">
@@ -53,10 +60,10 @@
         </div>
     </nav>
 </header>
+
 {% if not request.user.is_staff %}
 {% if not request.user.id_empleado_id %}
 <nav id="menu" class="menu menu-inactive shadow">
-
     <ul>
         <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Mis Productos<span
                     class="icon-down-open"></span></a>
@@ -89,35 +96,11 @@
         <li><a href="#">Contacto</a></li>
     </ul>
     {% else %}
-    <nav id="menu" class="menu menu-inactive shadow">
-
-        <ul>
-            <li><a href="{% url 'prestamos-empl' %}">Prestamos</a></li>
-            <li class="idSubmenu" onclick="desplegarSubmenu('submenu1')"><a href="#">Tarjetas<span
-                        class="icon-down-open"></span></a>
-                <ul id="submenu1" class="submenu submenu-inactive">
-                    <li><a href="#">Sub item1</a></li>
-                </ul>
-            </li>
-            <li class="idSubmenu" onclick="desplegarSubmenu('submenu2')"><a href="#">Clientes<span
-                        class="icon-down-open"></span></a>
-                <ul id="submenu2" class="submenu-inactive">
-
-                </ul>
-            </li>
-            <li class="idSubmenu" onclick="desplegarSubmenu('submenu3')">
-                <ul id="submenu3" class="submenu-inactive">
-
-
-                </ul>
-            </li>
-
-        </ul>
-        {% endif %}
-        {% else %}
-        {% endif %}
-    </nav>
-    {%endblock%}
-    {%block scripts%}
-    <script src="{% static 'ITBA/js/home.js' %}"></script>
-    {%endblock%}
+    {% endif %}
+    {% else %}
+    {% endif %}
+</nav>
+{%endblock%}
+{%block scripts%}
+<script src="{% static 'ITBA/js/home.js' %}"></script>
+{%endblock%}
