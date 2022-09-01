@@ -56,7 +56,6 @@
 </div>
 {% csrf_token %}
 <script>
-    let sucursal;
     const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     datePickerId.min = new Date().toISOString().split("T")[0];
 
@@ -79,22 +78,15 @@
                 console.log(response.status);
                 if (response.status == 201) {
                     document.getElementById("success").innerHTML = "Prestamo solicitado correctamente"
-
                 }
                 if (response.status == 404 || response.status == 400) {
                     document.getElementById("success").innerHTML = "No se ha podido encontrar la información proporcionada"
-
                 }
-
-
             })
             .then(function (data) {
-
                 document.getElementById("success").innerHTML = data.status
             })
             .catch(error => {
-
-
             });
     }
 

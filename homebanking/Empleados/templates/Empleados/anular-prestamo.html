@@ -1,0 +1,57 @@
+{% extends 'ITBA/base-nav.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Anular prestamo{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+<div class="d-flex align-items-center justify-content-center"
+    style="flex-flow: column; background: var(--gradient); min-height:700px; height:fit-content">
+
+    <div class="d-flex justify-content-center bg-light rounded p-4 mt-3 mb-5">
+        <di class="w-100">
+            <p id="respuesta"></p>
+            <h5><strong>Anular prestamo:</strong></h5>
+            <div class="input-group mb-3">
+                <input class="form-control" placeholder="Ingrese ID de prestamo" id="idprestamo">
+                <div class="input-group-append">
+                    <span class="btn btn-outline-danger"
+                        onclick="BorrarPrestamo(document.getElementById('idprestamo').value)">Borrar</span>
+                </div>
+            </div>
+
+            <div class="container">
+                <table class="table table-hover">
+                    <tbody id="cuentasBody">
+
+                    </tbody>
+                </table>
+            </div>
+    </div>
+</div>
+</div>
+{% csrf_token %}
+<script>
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    function BorrarPrestamo(id) {
+        document.getElementById("respuesta").innerHTML = ""
+
+        const deleted = fetch(`http://127.0.0.1:8000/API/prestamos/` + id + `/`, {
+            headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
+            method: "DELETE",
+        }).then(function (response) {
+            console.log(response.status);
+            if (response.status == 200) {
+                document.getElementById("respuesta").innerHTML = "Prestamo anulado correctamente"
+            }
+            if (response.status == 404 || response.status == 400) {
+                document.getElementById("respuesta").innerHTML = "No se ha podido encontrar la información proporcionada"
+            }
+        });
+    }
+</script>
+</div>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'ITBA/js/home.js' %}"></script>
+{% endblock %}

@@ -41,6 +41,7 @@ urlpatterns = [
     path('home-empleado/', Empleados.views.home_empleado, name="home-empleado"),
     path('prestamos-empl/', Empleados.views.prestamos_empl, name="prestamos-empl"),
     path('sol-prestamos-empl/', Empleados.views.sol_prestamos_empl, name="sol-prestamos-empl"),
+    path('anular-prestamo/', Empleados.views.anular_prestamo, name="anular-prestamo"),
     path('tarjetas-empl/', Empleados.views.tarjetas_empl, name="tarjetas-empl"),
 
     path('alta-user/', Login.views.alta_user, name="alta-user"),

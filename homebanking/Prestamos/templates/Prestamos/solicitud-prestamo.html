@@ -6,8 +6,8 @@
 <!-- Agrego contenido -->
 {% block content %}
 <div class="d-flex align-items-center justify-content-center" style="background: var(--gradient); height:700px; ">
-    <div class="d-flex justify-content-center bg-light rounded p-4">
-        <form action="" method="POST" style="width:30rem;">
+    <div class="d-flex justify-content-center bg-light rounded p-2 col-7">
+        <form action="" method="POST" style="width: -webkit-fill-available;">
             {% if 'ok' in request.GET %}
             <P class="text-success">Su prestamo se solicitó correctamente</P>
             {% endif %}

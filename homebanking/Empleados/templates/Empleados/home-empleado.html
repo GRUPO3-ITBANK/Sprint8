@@ -15,9 +15,9 @@
         <div class="card-body">
 
             <p class="card-text">Gestión de prestamos.</p>
-            <a href="{% url 'prestamos-empl'%}" class="btn btn-primary">Ver prestamos por sucursal</a>
-            <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary">Solicitar prestamo para cliente</a>
-
+            <a href="{% url 'prestamos-empl'%}" class="btn btn-primary m-2">Ver prestamos por sucursal</a>
+            <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary m-2">Solicitar prestamo para cliente</a>
+            <a href="{% url 'anular-prestamo' %}" class="btn btn-primary m-2">Anular prestamo</a>
         </div>
     </div>
     <div class="card m-4" style="height: fit-content; ">
@@ -27,7 +27,7 @@
         <div class="card-body">
 
             <p class="card-text">Gestión de clientes.</p>
-
+            <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary m-2">Modificar dirección de cliente</a>
         </div>
     </div>
     <div class="card m-4" style="height: fit-content;">
@@ -37,7 +37,7 @@
         <div class="card-body">
 
             <p class="card-text">Gestión de tarjetas.</p>
-            <a href="{% url 'tarjetas-empl' %}" class="btn btn-primary">Ver tarjetas por cliente</a>
+            <a href="{% url 'tarjetas-empl' %}" class="btn btn-primary m-2">Ver tarjetas por cliente</a>
         </div>
     </div>
 </div>

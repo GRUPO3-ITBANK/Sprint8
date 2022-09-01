@@ -21,6 +21,13 @@ def sol_prestamos_empl(request):
         return render(request,"ITBA/home.html")
     return render(request, 'ITBA/index.html')
 
+def anular_prestamo(request):
+    if request.user.is_authenticated:
+        if (request.user.id_empleado is not None):
+            return render(request, "Empleados/anular-prestamo.html")
+        return render(request,"ITBA/home.html")
+    return render(request, 'ITBA/index.html')
+
 def tarjetas_empl(request):
     if request.user.is_authenticated:
         if (request.user.id_empleado is not None):
