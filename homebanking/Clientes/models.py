@@ -8,12 +8,8 @@ class Cliente(models.Model):
     apellido=models.CharField(max_length=50)
     DNI=models.CharField(max_length=50,unique=True,)
     fecha_de_nac=models.DateField()
-    TIPOS=(
-        ('C','Classic'),
-        ('G','Gold'),
-        ('B','Black')
-    )
-    tipo_cliente = models.CharField(max_length=1,choices=TIPOS)
+    tipo_cliente = models.CharField(max_length=100)
+    direccion=models.CharField(max_length=200)
     sucursal = models.ForeignKey(Sucursal, on_delete=models.DO_NOTHING)
 
     class Meta:

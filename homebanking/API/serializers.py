@@ -21,8 +21,12 @@ class EmpleadoSerializer(serializers.ModelSerializer):
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['nombre','apellido','DNI','email','fecha_de_nac','tipo_cliente','sucursal']
+        fields = ['nombre','apellido','DNI','email','fecha_de_nac','tipo_cliente','direccion','sucursal']
 
+class ClienteSerializerDireccion(serializers.ModelSerializer):
+    class Meta:
+        model = Cliente
+        fields = ['direccion']
 
 class PrestamoSerializer(serializers.ModelSerializer):
     class Meta:

@@ -6,7 +6,7 @@ from Clientes.models import Cliente
 from Cuentas.models import Cuenta
 from Prestamos.models import Prestamo
 from Tarjetas.models import Tarjeta
-from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer, TarjetaSerializer
+from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer, TarjetaSerializer, ClienteSerializerDireccion
 
 class ClienteList(APIView):
     def get(self, request):
@@ -20,6 +20,26 @@ class ClienteList(APIView):
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
 
+class ClienteDetails(APIView):
+    def put(self, request, pk):
+        serializer = ClienteSerializerDireccion(Cliente.objects.filter(pk=pk).first(), data=request.data)
+        if request.user.is_authenticated:
+            if not (request.user.id_empleado_id == None): 
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            else:
+                if request.user.id_cliente.id == pk:
+                    if serializer.is_valid():
+                        serializer.save()
+                        return Response(serializer.data)
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                else:
+                    return Response( status=status.HTTP_401_UNAUTHORIZED)
+        return Response( status=status.HTTP_401_UNAUTHORIZED)
+        
+
 
 class CuentaList(APIView):
     def get(self, request):
@@ -28,11 +48,10 @@ class CuentaList(APIView):
                 serializer = CuentaSerializer(Cuenta.objects.all(), many=True)
                 return Response(serializer.data, status=status.HTTP_200_OK)
             else:
-                serializer = CuentaSerializer(Cuenta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True)
+                serializer = CuentaSerializer(Cuenta.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si es cliente solo veo la cuenta perteneciente a su id
             return Response(serializer.data, status=status.HTTP_200_OK)
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
-
 
 
 class PrestamoDetails(APIView):
