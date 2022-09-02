@@ -1,0 +1,67 @@
+{% extends 'ITBA/base-nav-inicio.html' %}
+<!-- Contenido estatico -->
+{% load static %}
+<!-- Agrego titulo -->
+{% block title %}Index{% endblock %}
+<!-- Agrego contenido -->
+{% block content %}
+{% block spansNavbar %}
+{% endblock spansNavbar %}
+
+<div style="background: var(--gradient); min-height:1000px; height:fit-content">
+    <header class="masthead  d-flex justify-content-center align-items-center "
+        style="background: url('../static/ITBA/img/sucursales.png');background-size: cover; height:500px;">
+        <div class="site-heading text-center text-light">
+            <h1 style='font-size: 60px'>Sucursales</h1>
+            <span class="subheading">Listado de sucursales</span>
+        </div>
+    </header>
+    <div class="d-flex  mt-5" style="place-content:center">
+
+        <div class="list-group col-9" id="ulBody">
+        </div>
+    </div>
+</div>
+<script>
+    function traerDatos() {
+        fetch("http://127.0.0.1:8000/API/sucursales/", {
+            mode: 'no-cors'
+        })
+            .then((resp) => resp.json()) //recibo objeto de la request y lo convierto en objeto json
+            .then(function (data) {
+                //proceso json
+                let list = data;
+                console.log(data);
+
+                let ul = document.getElementById("ulBody");
+
+                for (let d of list) {
+                    let a = document.createElement("a")
+                    a.classList = "list-group-item"
+                    let div = document.createElement("div")
+                    div.classList = "d-flex w-100 justify-content-between"
+                    let nombreSucursal = document.createElement("div")
+                    nombreSucursal.classList = "h5 mb-1"
+                    let numSucursal = document.createElement("p")
+                    numSucursal.classList = "mb-1"
+                    let direccionSucursal = document.createElement("p")
+                    direccionSucursal.classList = "mb-1"
+
+                    nombreSucursal.innerHTML = d.nombre_sucursal
+                    div.append(nombreSucursal)
+                    numSucursal.innerHTML = "Sucursal n°: " + d.numero_sucursal
+                    direccionSucursal.innerHTML = "Dirección: " + d.direccion_sucursal
+
+                    a.append(div, numSucursal, direccionSucursal)
+                    ul.append(a)
+
+                }
+            });
+    }
+
+    traerDatos()
+</script>
+
+{% endblock %}
+{% block scripts %}
+{% endblock %}

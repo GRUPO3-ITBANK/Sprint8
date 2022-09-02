@@ -27,3 +27,5 @@ def home(request):
     else:
         return render(request, "ITBA/index.html")
 
+def sucursales(request):
+    return render(request, "ITBA/sucursales.html")

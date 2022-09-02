@@ -34,3 +34,10 @@ def tarjetas_empl(request):
             return render(request, "Empleados/empl-tarjetas.html")
         return render(request,"ITBA/home.html")
     return render(request, 'ITBA/index.html')    
+
+def modif_cliente(request):
+    if request.user.is_authenticated:
+        if (request.user.id_empleado is not None):
+            return render(request, "Empleados/modif-cliente.html")
+        return render(request,"ITBA/home.html")
+    return render(request, 'ITBA/index.html')   

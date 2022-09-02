@@ -28,6 +28,7 @@ urlpatterns = [
     path('home/', ITBA.views.home, name="home"),
     path('', ITBA.views.init, name="init"),
     path('index/', ITBA.views.index, name="index"),
+    path('sucursales/', ITBA.views.sucursales, name="sucursales"),
     path('admin/', admin.site.urls),
 
     path('logout-session/', registration.views.logout, name='logout-session'),
@@ -37,16 +38,16 @@ urlpatterns = [
     path('prestamos/', Prestamos.views.prestamos, name="prestamos"),
 
     path('home-superuser/', Login.views.home_super_user, name="home-superuser"),
+    path('alta-user/', Login.views.alta_user, name="alta-user"),
+    path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
+    path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
 
     path('home-empleado/', Empleados.views.home_empleado, name="home-empleado"),
     path('prestamos-empl/', Empleados.views.prestamos_empl, name="prestamos-empl"),
     path('sol-prestamos-empl/', Empleados.views.sol_prestamos_empl, name="sol-prestamos-empl"),
     path('anular-prestamo/', Empleados.views.anular_prestamo, name="anular-prestamo"),
     path('tarjetas-empl/', Empleados.views.tarjetas_empl, name="tarjetas-empl"),
-
-    path('alta-user/', Login.views.alta_user, name="alta-user"),
-    path('alta-user-cl/', Login.views.alta_user_cl, name="alta-user-cl"),
-    path('alta-user-empl/', Login.views.alta_user_empl, name="alta-user-empl"),
+    path('modif-cliente/', Empleados.views.modif_cliente, name="modif-cliente"),
 
     path('perfil/', Perfil.views.perfil, name="perfil" ),
 

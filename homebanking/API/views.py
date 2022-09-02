@@ -25,6 +25,8 @@ class ClienteList(APIView):
 
 class ClienteDetails(APIView):
     def put(self, request, pk):
+        if (Cliente.objects.filter(pk=pk).first() == None):
+            return Response(status=status.HTTP_404_NOT_FOUND)
         serializer = ClienteSerializerDireccion(Cliente.objects.filter(pk=pk).first(), data=request.data)
         if request.user.is_authenticated:
             if not (request.user.id_empleado_id == None): 
@@ -80,6 +82,8 @@ class CuentaDetails(APIView):
 
 
 # ENDPOINTS PRESTAMOS
+
+
 class PrestamoDetails(APIView):
     def get(self, request,pk):
         if request.user.is_authenticated:
@@ -137,8 +141,8 @@ class PrestamoList(APIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response( status=status.HTTP_401_UNAUTHORIZED)
         return Response( status=status.HTTP_401_UNAUTHORIZED) 
-    
-          
+
+   
 # ENDPOINTS TARJETAS
 class TarjetaList(APIView):
     def get(self, request):
