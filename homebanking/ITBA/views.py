@@ -5,9 +5,9 @@ from Cuentas.models import Cuenta
 def init(request):
     if request.user.is_authenticated:
         if request.user.is_staff:
-            return render(request, "home-superuser")
+            return redirect ("home-superuser")
         if not (request.user.id_empleado_id == None):
-            return render(request, "home-empleado")
+            return redirect("home-empleado")
         return redirect('home')
     else:
         return redirect('index')
