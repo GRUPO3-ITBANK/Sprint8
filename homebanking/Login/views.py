@@ -9,20 +9,20 @@ def home_super_user(request):
     if request.user.is_authenticated:
         if (request.user.is_staff):
             return render(request, "Login/home-superuser.html",)
-        return render(request,"ITBA/home.html")
-    return render(request, 'ITBA/index.html')
+        return redirect('home')
+    return redirect('index')
     
 
 def alta_user(request):
     if not (request.user.is_staff):
-        return render(request, 'ITBA/index.html')
+        return redirect('init')
     return render(request, "Login/alta-user.html",)
 
     
 def alta_user_cl(request):
 
     if not (request.user.is_staff):
-        return render(request, 'ITBA/index.html')
+        return redirect('init')
     if request.method == "POST":
         id_cliente = request.POST.get('id_cliente')
         password = make_password(request.POST.get('pass'))
@@ -34,7 +34,7 @@ def alta_user_cl(request):
 
 def alta_user_empl(request):
     if not (request.user.is_staff):
-        return render(request, 'ITBA/index.html')
+        return redirect('init')
     if request.method == "POST":
         id_empleado = request.POST.get('id_empleado')
         dni = request.POST.get('dni')

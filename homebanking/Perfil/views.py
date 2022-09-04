@@ -1,10 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 def perfil(request):
     if request.user.is_authenticated:
-        if not (request.user.is_staff):
-            return render(request, "Perfil/perfil.html")
-        else:
-            return render(request, "ITBA/home.html")
+        if request.user.is_staff or  not (request.user.id_empleado_id == None): #si es staff o empleado no tienen perfil..
+                return redirect("home")
+        return render(request, "Perfil/perfil.html")
     else:
-        return render(request, "ITBA/index.html")
+        return redirect('index')
+

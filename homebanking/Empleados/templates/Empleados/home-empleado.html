@@ -7,37 +7,38 @@
 {% block content %}
 <div class="col p-3" id="main-contenedor"
     style="background: var(--gradient); min-height:700px; height:fit-content; place-content:center;">
+    <div class="col-lg-9">
+        <div class="card m-4" style="height: fit-content;">
+            <div class="card-header">
+                <h5 class="card-title">Prestamos</h5>
+            </div>
+            <div class="card-body">
 
-    <div class="card m-4" style="height: fit-content;">
-        <div class="card-header">
-            <h5 class="card-title">Prestamos</h5>
+                <p class="card-text">Gestión de prestamos.</p>
+                <a href="{% url 'prestamos-empl'%}" class="btn btn-primary m-2">Ver prestamos por sucursal</a>
+                <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary m-2">Solicitar prestamo para cliente</a>
+                <a href="{% url 'anular-prestamo' %}" class="btn btn-primary m-2">Anular prestamo</a>
+            </div>
         </div>
-        <div class="card-body">
+        <div class="card m-4" style="height: fit-content; ">
+            <div class="card-header">
+                <h5 class="card-title">Clientes</h5>
+            </div>
+            <div class="card-body">
 
-            <p class="card-text">Gestión de prestamos.</p>
-            <a href="{% url 'prestamos-empl'%}" class="btn btn-primary m-2">Ver prestamos por sucursal</a>
-            <a href="{% url 'sol-prestamos-empl' %}" class="btn btn-primary m-2">Solicitar prestamo para cliente</a>
-            <a href="{% url 'anular-prestamo' %}" class="btn btn-primary m-2">Anular prestamo</a>
+                <p class="card-text">Gestión de clientes.</p>
+                <a href="{% url 'modif-cliente' %}" class="btn btn-primary m-2">Modificar dirección de cliente</a>
+            </div>
         </div>
-    </div>
-    <div class="card m-4" style="height: fit-content; ">
-        <div class="card-header">
-            <h5 class="card-title">Clientes</h5>
-        </div>
-        <div class="card-body">
+        <div class="card m-4" style="height: fit-content;">
+            <div class="card-header">
+                <h5 class="card-title">Tarjetas</h5>
+            </div>
+            <div class="card-body">
 
-            <p class="card-text">Gestión de clientes.</p>
-            <a href="{% url 'modif-cliente' %}" class="btn btn-primary m-2">Modificar dirección de cliente</a>
-        </div>
-    </div>
-    <div class="card m-4" style="height: fit-content;">
-        <div class="card-header">
-            <h5 class="card-title">Tarjetas</h5>
-        </div>
-        <div class="card-body">
-
-            <p class="card-text">Gestión de tarjetas.</p>
-            <a href="{% url 'tarjetas-empl' %}" class="btn btn-primary m-2">Ver tarjetas por cliente</a>
+                <p class="card-text">Gestión de tarjetas.</p>
+                <a href="{% url 'tarjetas-empl' %}" class="btn btn-primary m-2">Ver tarjetas por cliente</a>
+            </div>
         </div>
     </div>
 </div>
