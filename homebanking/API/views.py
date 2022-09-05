@@ -9,7 +9,6 @@ from Tarjetas.models import Tarjeta
 from Login.models import MyUser
 from API.serializers import ClienteSerializer, CuentaSerializer, PrestamoSerializer, TarjetaSerializer, ClienteSerializerDireccion, SucursalSerializer
 
-
 # ENDPOINTS CLIENTES
 class ClienteList(APIView):
     def get(self, request):
@@ -25,24 +24,25 @@ class ClienteList(APIView):
 
 class ClienteDetails(APIView):
     def put(self, request, pk):
-        if (Cliente.objects.filter(pk=pk).first() == None):
-            return Response(status=status.HTTP_404_NOT_FOUND)
-        serializer = ClienteSerializerDireccion(Cliente.objects.filter(pk=pk).first(), data=request.data)
-        if request.user.is_authenticated:
-            if not (request.user.id_empleado_id == None): 
-                if serializer.is_valid():
-                    serializer.save()
-                    return Response(serializer.data)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            else:
-                if request.user.id_cliente.id == pk:
+        if request.method == "PUT":
+            if (Cliente.objects.filter(pk=pk).first() == None):
+                return Response(status=status.HTTP_404_NOT_FOUND)
+            serializer = ClienteSerializerDireccion(Cliente.objects.filter(pk=pk).first(), data=request.data)
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None): 
                     if serializer.is_valid():
                         serializer.save()
                         return Response(serializer.data)
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
                 else:
-                    return Response( status=status.HTTP_401_UNAUTHORIZED)
-        return Response( status=status.HTTP_401_UNAUTHORIZED)
+                    if request.user.id_cliente.id == pk:
+                        if serializer.is_valid():
+                            serializer.save()
+                            return Response(serializer.data)
+                        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                    else:
+                        return Response( status=status.HTTP_401_UNAUTHORIZED)
+            return Response( status=status.HTTP_401_UNAUTHORIZED)
       
     def get(self, request,pk):
         if request.user.is_authenticated:
@@ -86,30 +86,44 @@ class CuentaDetails(APIView):
 
 class PrestamoDetails(APIView):
     def get(self, request,pk):
-        if request.user.is_authenticated:
-            if not (request.user.id_empleado_id == None) or request.user.is_staff: #si es empleado... filtro los prestamos por sucursal
-                serializer = PrestamoSerializer(Prestamo.objects.filter(sucursal=pk), many=True) #Traigo los prestamos de la sucursal con id que me pide
-                return Response(serializer.data, status=status.HTTP_200_OK)
-            else:
-                serializer = PrestamoSerializer(Prestamo.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si tan solo es un cliente filtro los prestamos por id de cliente
-                return Response(serializer.data, status=status.HTTP_200_OK)
-        return Response( status=status.HTTP_401_UNAUTHORIZED)
-    
-    def delete(self, request, pk):
-        prestamo = Prestamo.objects.filter(pk=pk).first()
-        if request.user.is_authenticated:
-            if not (request.user.id_empleado_id == None):
-                if prestamo:
-                    serializer = PrestamoSerializer(prestamo)
-                    prestamo.delete()
-                    cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
-                    cuenta.balance= cuenta.balance - serializer.data['total']
-                    cuenta.save()
+        if request.method == "GET":
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None) or request.user.is_staff: #si es empleado... filtro los prestamos por sucursal
+                    serializer = PrestamoSerializer(Prestamo.objects.filter(sucursal=pk), many=True) #Traigo los prestamos de la sucursal con id que me pide
                     return Response(serializer.data, status=status.HTTP_200_OK)
-                return Response(status=status.HTTP_404_NOT_FOUND)
-            else:
-                return Response( status=status.HTTP_401_UNAUTHORIZED)
-        return Response( status=status.HTTP_401_UNAUTHORIZED)    
+                else:
+                    serializer = PrestamoSerializer(Prestamo.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si tan solo es un cliente filtro los prestamos por id de cliente
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response( status=status.HTTP_401_UNAUTHORIZED)
+        
+class PrestamoDelete(APIView):
+    def get(self, request,pk):
+        if request.method == "GET":
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None) or request.user.is_staff: 
+                    serializer = PrestamoSerializer(Prestamo.objects.filter(pk=pk), many=True) 
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+                else:
+                    serializer = PrestamoSerializer(Prestamo.objects.filter(ID_cliente=request.user.id_cliente.id), many=True) #si tan solo es un cliente filtro los prestamos por id de cliente
+                    return Response(serializer.data, status=status.HTTP_200_OK)
+            return Response( status=status.HTTP_401_UNAUTHORIZED)
+            
+    def delete(self, request, pk):
+        if request.method == "DELETE":
+            prestamo = Prestamo.objects.filter(pk=pk).first()
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None):
+                    if prestamo:
+                        serializer = PrestamoSerializer(prestamo)
+                        prestamo.delete()
+                        cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
+                        cuenta.balance= cuenta.balance - serializer.data['total']
+                        cuenta.save()
+                        return Response(serializer.data, status=status.HTTP_200_OK)
+                    return Response(status=status.HTTP_404_NOT_FOUND)
+                else:
+                    return Response( status=status.HTTP_401_UNAUTHORIZED)
+            return Response( status=status.HTTP_401_UNAUTHORIZED) 
 
 class PrestamoList(APIView):
     def get(self, request):
@@ -123,24 +137,26 @@ class PrestamoList(APIView):
         else: 
             return Response( status=status.HTTP_401_UNAUTHORIZED)
 
+    
     def post(self,request,format=None):
-        serializer = PrestamoSerializer(data=request.data)
-        print
-        if request.user.is_authenticated:
-            if not (request.user.id_empleado_id == None):
-                if serializer.is_valid():
-                    if  not (MyUser.objects.filter(id_cliente_id=serializer.validated_data["ID_cliente"]).first() == None): #SI ESTE CLIENTE NO ES UN USUARIO.. UNAUTHORIZED
-                        serializer.validated_data["sucursal"] = Cliente.objects.filter(pk=serializer.validated_data["ID_cliente"].id).first().sucursal
-                        serializer.save()
-                        cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
-                        cuenta.balance= cuenta.balance + serializer.data['total']
-                        cuenta.save()
-                    else:
-                          return Response( status=status.HTTP_404_NOT_FOUND)
-                    return Response(serializer.data, status=status.HTTP_201_CREATED)
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-            return Response( status=status.HTTP_401_UNAUTHORIZED)
-        return Response( status=status.HTTP_401_UNAUTHORIZED) 
+        if request.method == "POST":
+            serializer = PrestamoSerializer(data=request.data)
+            print
+            if request.user.is_authenticated:
+                if not (request.user.id_empleado_id == None):
+                    if serializer.is_valid():
+                        if  not (MyUser.objects.filter(id_cliente_id=serializer.validated_data["ID_cliente"]).first() == None): #SI ESTE CLIENTE NO ES UN USUARIO.. UNAUTHORIZED
+                            serializer.validated_data["sucursal"] = Cliente.objects.filter(pk=serializer.validated_data["ID_cliente"].id).first().sucursal
+                            serializer.save()
+                            cuenta = Cuenta.objects.filter(ID_cliente=serializer.data['ID_cliente'],tipo_cuenta="caja de ahorro").first()
+                            cuenta.balance= cuenta.balance + serializer.data['total']
+                            cuenta.save()
+                        else:
+                              return Response( status=status.HTTP_404_NOT_FOUND)
+                        return Response(serializer.data, status=status.HTTP_201_CREATED)
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                return Response( status=status.HTTP_401_UNAUTHORIZED)
+            return Response( status=status.HTTP_401_UNAUTHORIZED) 
 
    
 # ENDPOINTS TARJETAS
