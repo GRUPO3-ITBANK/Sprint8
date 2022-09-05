@@ -36,7 +36,7 @@
     function BorrarPrestamo(id) {
         document.getElementById("respuesta").innerHTML = ""
 
-        const deleted = fetch(`http://127.0.0.1:8000/API/prestamos/` + id + `/`, {
+        const deleted = fetch(`http://127.0.0.1:8000/API/prestamos-delete/` + id + `/`, {
             headers: { 'X-CSRFToken': csrftoken, 'Content-Type': 'application/json' },
             method: "DELETE",
         }).then(function (response) {
